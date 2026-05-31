@@ -1,0 +1,16 @@
+{
+  "name": "maia-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev site",
+    "build:site": "vitepress build site",
+    "sync:dist": "node scripts/sync-dist.mjs",
+    "build": "npm run build:site && npm run sync:dist",
+    "preview": "vitepress preview site"
+  },
+  "devDependencies": {
+    "sass": "^1.89.0",
+    "vitepress": "^1.6.4"
+  }
+}
