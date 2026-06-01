@@ -1,48 +1,84 @@
 <script setup>
-import { computed } from 'vue';
-import { withBase } from 'vitepress';
-import AppButton from './ui/AppButton.vue';
-import AppHeading from './ui/AppHeading.vue';
-import landingData from '../../../../data.json';
+import { computed, onMounted, ref } from "vue";
+import { withBase } from "vitepress";
+import AppButton from "./ui/AppButton.vue";
+import AppHeading from "./ui/AppHeading.vue";
 
 function normalizeVersion(version) {
-  if (typeof version !== 'string') {
-    return '';
+  if (typeof version !== "string") {
+    return "";
   }
 
   const trimmedVersion = version.trim();
 
   if (!trimmedVersion) {
-    return '';
+    return "";
   }
 
-  return `v${trimmedVersion.replace(/^v/i, '')}`;
+  return `v${trimmedVersion.replace(/^v/i, "")}`;
 }
 
 function normalizeDownloadUrl(url) {
-  if (typeof url !== 'string') {
-    return '#';
+  if (typeof url !== "string") {
+    return "#";
   }
 
   const trimmedUrl = url.trim();
 
-  return trimmedUrl || '#';
+  return trimmedUrl || "#";
 }
 
-const downloads =
-  landingData && typeof landingData.downloadUrl === 'object' ? landingData.downloadUrl : {};
+const manifestUrl = withBase("/channels/stable.json");
+const brandMarkUrl = withBase("/assets/tile-icon-2048.png");
+const brandLogotypeUrl = withBase("/assets/logotype.png");
+const manifest = ref(null);
 
-const versionLabel = computed(() => normalizeVersion(landingData?.appVersion) || 'v0.0.0');
-const windowsUrl = computed(() => normalizeDownloadUrl(downloads.windows));
-const androidUrl = computed(() => normalizeDownloadUrl(downloads.android));
-const brandMarkUrl = withBase('/assets/tile-icon-2048.png');
-const brandLogotypeUrl = withBase('/assets/logotype.png');
+async function loadManifest() {
+  try {
+    const response = await fetch(manifestUrl, { cache: "no-store" });
+
+    if (!response.ok) {
+      return;
+    }
+
+    manifest.value = await response.json();
+  } catch {
+    manifest.value = null;
+  }
+}
+
+const versionLabel = computed(() => {
+  return (
+    normalizeVersion(manifest.value?.appVersion) ||
+    normalizeVersion(manifest.value?.releaseTag) ||
+    "v0.0.0"
+  );
+});
+const windowsUrl = computed(() => {
+  return normalizeDownloadUrl(
+    manifest.value?.desktop?.windowsUrl ??
+      manifest.value?.desktop?.releasePageUrl,
+  );
+});
+const androidUrl = computed(() => {
+  return normalizeDownloadUrl(manifest.value?.android?.apkUrl);
+});
+
+onMounted(() => {
+  void loadManifest();
+});
 </script>
 
 <template>
   <header class="download-section">
-    <div class="download-section__glow download-section__glow--primary" aria-hidden="true"></div>
-    <div class="download-section__glow download-section__glow--secondary" aria-hidden="true"></div>
+    <div
+      class="download-section__glow download-section__glow--primary"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="download-section__glow download-section__glow--secondary"
+      aria-hidden="true"
+    ></div>
     <div class="download-section__content">
       <div class="download-section__brand">
         <img
@@ -71,7 +107,12 @@ const brandLogotypeUrl = withBase('/assets/logotype.png');
 
       <div class="download-section__actions">
         <p class="download-section__prompt">Pobierz</p>
-        <AppButton :href="windowsUrl" aria-label="Pobierz na Windows" label="Windows" variant="windows">
+        <AppButton
+          :href="windowsUrl"
+          aria-label="Pobierz na Windows"
+          label="Windows"
+          variant="windows"
+        >
           <template #icon>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -117,10 +158,26 @@ const brandLogotypeUrl = withBase('/assets/logotype.png');
   overflow: hidden;
   padding: var(--hero-padding-block) var(--hero-padding-inline);
   background:
-    radial-gradient(circle at 28% 24%, rgba(117, 59, 168, 0.329), transparent 74%),
-    radial-gradient(circle at 70% 66%, rgba(142, 102, 28, 0.301), transparent 52%),
-    radial-gradient(circle at top left, rgba(25, 140, 255, 0.14), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(61, 220, 132, 0.12), transparent 28%),
+    radial-gradient(
+      circle at 28% 24%,
+      rgba(117, 59, 168, 0.329),
+      transparent 74%
+    ),
+    radial-gradient(
+      circle at 70% 66%,
+      rgba(142, 102, 28, 0.301),
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at top left,
+      rgba(25, 140, 255, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(61, 220, 132, 0.12),
+      transparent 28%
+    ),
     linear-gradient(180deg, #040611 0%, #070c1b 45%, #040611 100%);
 
   &__glow {
@@ -134,13 +191,21 @@ const brandLogotypeUrl = withBase('/assets/logotype.png');
     &--primary {
       top: var(--hero-glow-primary-top);
       left: var(--hero-glow-primary-left);
-      background: radial-gradient(circle, rgba(25, 140, 255, 0.35), transparent 65%);
+      background: radial-gradient(
+        circle,
+        rgba(25, 140, 255, 0.35),
+        transparent 65%
+      );
     }
 
     &--secondary {
       right: var(--hero-glow-secondary-right);
       bottom: var(--hero-glow-secondary-bottom);
-      background: radial-gradient(circle, rgba(61, 220, 132, 0.22), transparent 65%);
+      background: radial-gradient(
+        circle,
+        rgba(61, 220, 132, 0.22),
+        transparent 65%
+      );
     }
   }
 
