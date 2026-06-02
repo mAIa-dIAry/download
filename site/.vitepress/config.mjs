@@ -11,6 +11,7 @@ export default defineConfig({
   base: landingBase,
   outDir: '../.site-dist',
   head: [
+    ['link', { rel: 'icon', href: `${landingBase}favicon.ico` }],
     ['meta', { name: 'theme-color', content: '#050816' }],
   ],
 });
