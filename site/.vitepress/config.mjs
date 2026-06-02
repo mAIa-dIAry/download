@@ -1,7 +1,21 @@
 import { defineConfig } from 'vitepress';
 
+function normalizeBase(base) {
+  const trimmedBase = base?.trim();
+
+  if (!trimmedBase) {
+    return null;
+  }
+
+  if (trimmedBase === '.' || trimmedBase === './') {
+    return './';
+  }
+
+  return trimmedBase.endsWith('/') ? trimmedBase : `${trimmedBase}/`;
+}
+
 const landingBase =
-  process.env.LANDING_BASE?.trim() ||
+  normalizeBase(process.env.LANDING_BASE) ??
   (process.env.NODE_ENV === 'production' ? '/download/' : '/');
 
 export default defineConfig({

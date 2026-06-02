@@ -3,6 +3,24 @@ import { computed, onMounted, ref } from "vue";
 import { withBase } from "vitepress";
 import AppButton from "./ui/AppButton.vue";
 
+function stopBackgroundClick(event) {
+  const targetElement = event.target;
+
+  if (!(targetElement instanceof Element)) {
+    return;
+  }
+
+  if (
+    targetElement.closest(
+      'a, button, input, select, textarea, summary, label, [role="button"], [role="link"]',
+    )
+  ) {
+    return;
+  }
+
+  event.stopPropagation();
+}
+
 function normalizeVersion(version) {
   if (typeof version !== "string") {
     return "";
@@ -69,7 +87,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="download-section">
+  <header class="download-section" @click="stopBackgroundClick">
     <div
       class="download-section__glow download-section__glow--primary"
       aria-hidden="true"
@@ -185,6 +203,7 @@ onMounted(() => {
     border-radius: 50%;
     filter: blur(2rem);
     opacity: 0.65;
+    pointer-events: none;
 
     &--primary {
       top: var(--hero-glow-primary-top);

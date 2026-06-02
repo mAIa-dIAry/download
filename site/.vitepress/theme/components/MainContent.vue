@@ -2,6 +2,24 @@
 import AppHeading from './ui/AppHeading.vue';
 import SectionCard from './ui/SectionCard.vue';
 
+function stopBackgroundClick(event) {
+  const targetElement = event.target;
+
+  if (!(targetElement instanceof Element)) {
+    return;
+  }
+
+  if (
+    targetElement.closest(
+      'a, button, input, select, textarea, summary, label, [role="button"], [role="link"]',
+    )
+  ) {
+    return;
+  }
+
+  event.stopPropagation();
+}
+
 const sectionParagraphs = [
   'MAIA to aplikacja dziennika z analizą notatek przez AI, która stopniowo poznaje sposób myślenia użytkownika i buduje coraz trafniejsze wsparcie.',
   'Projekt pomaga porządkować codzienne zapiski, wyłapywać wzorce emocjonalne oraz wspierać proces terapii lub autoterapii dzięki regularnej refleksji nad zapisanymi doświadczeniami.',
@@ -10,7 +28,7 @@ const sectionParagraphs = [
 </script>
 
 <template>
-  <main class="main-content">
+  <main class="main-content" @click="stopBackgroundClick">
     <SectionCard>
       <AppHeading eyebrow="O projekcie" tag="h2" variant="section">
         Dziennik, który uczy się użytkownika
