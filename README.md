@@ -15,3 +15,7 @@ Statyczny landing jest teraz zasilany przez VitePress i komponent Vue.
 - Style sa trzymane jako SCSS bezposrednio w komponentach Vue.
 - Landing pobiera aktualne linki i wersje w runtime z channels/stable.json.
 - npm run build generuje statyczny output do .site-dist/, a potem synchronizuje glowny index.html i artefakty statyczne do katalogu glownego projektu.
+
+## Kontekst procesu
+
+- Szczegoly publicznego flow release, manifestu i Pages sa opisane w LOGS.md.
