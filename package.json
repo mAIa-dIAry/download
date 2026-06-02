@@ -3,10 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync:channels": "node scripts/sync-channels.mjs",
+    "predev": "npm run sync:channels",
     "dev": "vitepress dev site",
+    "prebuild:site": "npm run sync:channels",
     "build:site": "vitepress build site",
     "sync:dist": "node scripts/sync-dist.mjs",
     "build": "npm run build:site && npm run sync:dist",
+    "prepreview": "npm run sync:channels",
     "preview": "vitepress preview site"
   },
   "devDependencies": {

@@ -2,7 +2,6 @@
 import { computed, onMounted, ref } from "vue";
 import { withBase } from "vitepress";
 import AppButton from "./ui/AppButton.vue";
-import AppHeading from "./ui/AppHeading.vue";
 
 function normalizeVersion(version) {
   if (typeof version !== "string") {
@@ -101,12 +100,11 @@ onMounted(() => {
         />
       </div>
 
-      <AppHeading :badge="versionLabel" tag="h1" variant="hero">
-        M<span>AI</span>A
-      </AppHeading>
-
       <div class="download-section__actions">
-        <p class="download-section__prompt">Pobierz</p>
+        <p class="download-section__prompt">
+          <span>Pobierz</span>
+          <span class="download-section__prompt-version">{{ versionLabel }}</span>
+        </p>
         <AppButton
           :href="windowsUrl"
           aria-label="Pobierz na Windows"
@@ -264,9 +262,26 @@ onMounted(() => {
   }
 
   &__prompt {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     flex-basis: 100%;
+    gap: var(--space-xs);
     font-size: 0.9rem;
     font-weight: 700;
+  }
+
+  &__prompt-version {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xs) var(--space-xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    letter-spacing: normal;
+    text-transform: none;
+    background: var(--color-badge);
   }
 
   &__footer {

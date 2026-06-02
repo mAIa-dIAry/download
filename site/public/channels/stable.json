@@ -1,0 +1,23 @@
+{
+  "channel": "stable",
+  "releaseTag": "v0.1.0",
+  "appVersion": "0.1.0",
+  "downloadPageUrl": "https://maia-diary.github.io/download/",
+  "desktop": {
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.0/MAIA-Setup-0.1.0.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.0"
+  },
+  "android": {
+    "nativeBuild": 1,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.0/maia-0.1.0.apk"
+  },
+  "ota": {
+    "webBundleVersion": "0.1.0-b1",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.0/maia-web-bundle-0.1.0-b1.zip",
+    "checksum": "UZUPELNIJ_SHA256_ZIP",
+    "minNativeBuild": 1,
+    "targetNativeBuild": 1,
+    "requiresNativeUpdate": false,
+    "otaEnabled": true
+  }
+}
