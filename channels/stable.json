@@ -3,6 +3,10 @@
   "releaseTag": "v0.1.1",
   "appVersion": "0.1.1",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
+  "desktop": {
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.1/MAIA-Setup-0.1.1.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.1"
+  },
   "android": {
     "nativeBuild": 5,
     "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.1/MAIA-0.1.1.apk"
