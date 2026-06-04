@@ -1,21 +1,21 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.1.8",
-  "appVersion": "0.1.8",
+  "releaseTag": "v0.1.9",
+  "appVersion": "0.1.9",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.8/MAIA-Setup-0.1.8.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.8"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.9/MAIA-Setup-0.1.9.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.9"
   },
   "android": {
-    "nativeBuild": 31,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.8/MAIA-0.1.8.apk"
+    "nativeBuild": 40,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.9/MAIA-0.1.9.apk"
   },
   "ota": {
-    "webBundleVersion": "0.1.8-b31",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.8/MAIA-ota-0.1.8-b31.zip",
-    "checksum": "7bf68a550dd33128e33286b7a6bb3e4596cbf65db5da687b2a3f32aea8463755",
-    "minNativeBuild": 31,
+    "webBundleVersion": "0.1.9-b40",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.9/MAIA-ota-0.1.9-b40.zip",
+    "checksum": "70ec7636e2d78a920541327cb414b8ab52de9411e3ac519b967a3dbfb23cd709",
+    "minNativeBuild": 40,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
