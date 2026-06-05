@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.2.2",
-  "appVersion": "0.2.2",
-  "publishedAt": "2026-06-05T16:37:25Z",
-  "releaseNotes": "Większy limit pojedynczej notatki, szersze okno wyszukiwania naturalnego miejsca podziału przy zapisie długich wpisów oraz poprawiony układ edytora na urządzeniach mobilnych.\n\n### Zmiany\n\n- **Edytor notatek — chunkowanie:** limit treści jednej notatki zwiększony z 512 do **2048** znaków; zakres poszukiwania granicy cięcia (akapit, zdanie, przecinek, biały znak) rozszerzony z ostatnich 128 do **512** znaków przed limitem.\n\n### Poprawki\n\n- **Edytor notatek (mobile):** scroll tylko w obszarze treści — strona edytora nie przewija się pod spodem (`AbyssPage` z wyłączonym scrollem kontenera); lepsze wykorzystanie wysokości ekranu dzięki osobnemu marginesowi rozszerzenia na mobile i desktopie; poprawiony poziomy scroll paska formatowania; etykiety przycisków Anuluj/Zapisz pozostają widoczne na węższych ekranach.",
+  "releaseTag": "v0.2.3",
+  "appVersion": "0.2.3",
+  "publishedAt": "2026-06-05T17:30:53Z",
+  "releaseNotes": "Niezawodniejsza synchronizacja LAN po połączeniu — naprawione zrywane sesje, brak przesyłania motywu i gubione notatki przy aktywnym parowaniu (Sentry: MAIA-CAPACITOR-3, MAIA-CAPACITOR-6).\n\n### Poprawki\n\n- **Synchronizacja LAN — network status probe:** odbiorca zawsze odsyła ACK na zapytanie o status sieci (również gdy nie ma jeszcze lokalnego rekordu sieci lub `networkId` się nie zgadza). Wcześniej ciche pominięcie odpowiedzi powodowało błąd `Network status probe timed out before the remote peer responded.` i trwałe zablokowanie seedu — stąd „brak przesyłania motywu” i „gubione notatki” mimo aktywnego połączenia.\n- **Synchronizacja LAN — odblokowanie seedu:** nieudany/spóźniony probe (timeout) nie blokuje już biznesowej synchronizacji — runtime przechodzi do `queueInitialSyncSeed` + flush outboxa zamiast jedynie raportować błąd. Realny konflikt generacji/reset nadal jest poprawnie wstrzymywany (`blocked-by-network-status`).\n- **Synchronizacja LAN — utrata połączenia:** błąd `LAN sync connection is not active` przy wysyłce jest teraz traktowany jako zerwane połączenie (przejście do `idle` + reconnect hosta/joinera) zamiast twardego raportu błędu, co ogranicza szum w Sentry i przyspiesza odzyskanie sesji.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-Setup-0.2.2.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.2"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-Setup-0.2.3.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.3"
   },
   "android": {
     "nativeBuild": 46,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-0.2.2.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-0.2.3.apk"
   },
   "ota": {
-    "webBundleVersion": "0.2.2-b46.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-ota-0.2.2-b46.1.zip",
-    "checksum": "8c94cf020ca37e66c346554cdca6d485116201e5e07089e8c9cdf84e7e50effa",
+    "webBundleVersion": "0.2.3-b46.2",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-ota-0.2.3-b46.2.zip",
+    "checksum": "134df5c221b919718c64f8d139c2187c695a1b31969025192adcba182970ebc1",
     "minNativeBuild": 46,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
