@@ -1,21 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.1.12",
-  "appVersion": "0.1.12",
+  "releaseTag": "v0.2.0",
+  "appVersion": "0.2.0",
+  "publishedAt": "2026-06-05T14:09:10Z",
+  "releaseNotes": "Dashboard z wykresem aktywności notatek, odświeżony edytor z podsumowaniem wpisów, nowa typografia Roboto oraz porządki w układzie ustawień i changelogu wersji.\n\n### Nowości\n\n- **Dashboard — widget systematyczności (`DailyStatsWidget`):** karta **Systematyczność** z wykresem area ostatnich 30 dni, średnią notatek dziennie i łączną liczbą wpisów; dane pobierane z lokalnej bazy po odblokowaniu dziennika.\n- **Wykres aktywności (`AbyssChart`):** komponent Abyss Design System oparty na ApexCharts — responsywna oś X z doborem etykiet, własna skala Y, tooltip z pełną datą (np. „7 maja 2026”) i skrótem dnia na osi.\n- **Strona Analiza:** karta **Raporty i narzędzia AI** z komunikatem o nadchodzących funkcjach analizy wpisów.\n- **Siatka dashboardu (`AbyssGrid`):** wspólny układ widgetów na stronie głównej i w analizie.\n- **Edytor notatek:** pasek postępu bieżącego wpisu oraz licznik zapisanych notatek; ochrona przed zapisem dwóch wpisów z tym samym znacznikiem czasu (`NoteTimestampCollisionError`).\n- **Typografia:** rodzina **Roboto** (UI) i **Roboto Mono** (kod) zamiast fontów systemowych; mixin `abyss-content` i komponent `AbyssContent` dla spójnego formatowania treści.\n- **Ustawienia — panel boczny:** blok **O aplikacji** (`AboutApp`) z ikoną kafelka, logotypem, nazwą i wersją zamiast osobnych elementów w sidebarze.\n- **Zasoby marki:** nowa ikona aplikacji w wersji tile (kafelek PWA, `AboutApp`, Android `ic_launcher`), odświeżone pozostałe ikony i favicony, splash screeny Androida oraz ikony Electrona (Windows, macOS, Linux).\n\n### Poprawki\n\n- **`AbyssChart`:** wykres dopasowuje szerokość do kontenera przy zmianie rozmiaru okna; naprawiony błąd `destroy` w `vue3-apexcharts` przy pierwszym renderze.\n- **`VersionChangelog`:** czytelniejszy układ sekcji, poprawione maskowanie treści przy zwijaniu oraz wsparcie HTML w opisie wersji.\n- **`NoteEditor`:** uproszczony układ statystyk i paska narzędzi; lepsze zachowanie scrollbara i marginesów na mobile i desktopie.\n- **Storybook:** ujednolicone style tabel w dokumentacji; drobna korekta wizualna komponentu `AbyssInfo`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.12/MAIA-Setup-0.1.12.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.12"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-Setup-0.2.0.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.0"
   },
   "android": {
-    "nativeBuild": 42,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.12/MAIA-0.1.12.apk"
+    "nativeBuild": 43,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-0.2.0.apk"
   },
   "ota": {
-    "webBundleVersion": "0.1.12-b42.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.12/MAIA-ota-0.1.12-b42.1.zip",
-    "checksum": "8ff451c7e4e888f428f71f73ff462c1d1574bee0baf5be023da902a02f7cf958",
-    "minNativeBuild": 42,
+    "webBundleVersion": "0.2.0-b43",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-ota-0.2.0-b43.zip",
+    "checksum": "2ea59e1ed5b4065fb2fd6c6b5e496dc0100a0ebb870fea2d20b537cf5e22fc19",
+    "minNativeBuild": 43,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
