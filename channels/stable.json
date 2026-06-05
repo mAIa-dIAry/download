@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.2.1",
-  "appVersion": "0.2.1",
-  "publishedAt": "2026-06-05T15:26:08Z",
-  "releaseNotes": "Poprawki stabilności wykresu dashboardu, wyświetlania changelogu w ustawieniach, eksportu danych oraz aktualizacji na Androidzie i Windowsie po wydaniu 0.2.0.\n\n### Poprawki\n\n- **`DailyStatsWidget`:** średnia notatek dziennie liczona od dnia pierwszej notatki, gdy użytkownik zaczął prowadzić dziennik w ostatnich 30 dniach — dni bez wpisów sprzed startu nie obniżają średniej.\n- **`AbyssChart`:** leniwe ładowanie ApexCharts w rendererze — usunięty globalny boot; naprawiony błąd Sentry `Cannot read properties of null (reading 'node')` przy starcie na Electronie i Capacitorze.\n- **Electron (Windows):** naprawiony start zainstalowanej aplikacji po buildzie produkcyjnym; changelog w ustawieniach pobierany wyłącznie w rendererze (manifest, GitHub API, Atom) — ten sam mechanizm co na Capacitorze.\n- **`VersionChangelog` / `AbyssContent`:** poprawne renderowanie HTML opisu wersji (bez surowych tagów i zbędnych pustych linii od `<br>`); naprawa legacy cache ze zescape’owanym HTML.\n- **Ustawienia — import danych:** potwierdzenie importu JSON przez `AbyssDialog` zamiast `$q.dialog`.\n- **Eksport danych:** anulowanie share traktowane jako rezygnacja (bez fałszywego błędu); na Androidzie zapis pliku przez selektor systemowy zamiast share sheet; pewniejsze wykrywanie sukcesu eksportu.\n- **Aktualizacje Android (Capacitor):** po instalacji APK wersja bundle WebView uzupełnia brakujący sufiks `-b{build}` — koniec fałszywego wymuszania OTA identycznego z wbudowanym bundle.",
+  "releaseTag": "v0.2.2",
+  "appVersion": "0.2.2",
+  "publishedAt": "2026-06-05T16:37:25Z",
+  "releaseNotes": "Większy limit pojedynczej notatki, szersze okno wyszukiwania naturalnego miejsca podziału przy zapisie długich wpisów oraz poprawiony układ edytora na urządzeniach mobilnych.\n\n### Zmiany\n\n- **Edytor notatek — chunkowanie:** limit treści jednej notatki zwiększony z 512 do **2048** znaków; zakres poszukiwania granicy cięcia (akapit, zdanie, przecinek, biały znak) rozszerzony z ostatnich 128 do **512** znaków przed limitem.\n\n### Poprawki\n\n- **Edytor notatek (mobile):** scroll tylko w obszarze treści — strona edytora nie przewija się pod spodem (`AbyssPage` z wyłączonym scrollem kontenera); lepsze wykorzystanie wysokości ekranu dzięki osobnemu marginesowi rozszerzenia na mobile i desktopie; poprawiony poziomy scroll paska formatowania; etykiety przycisków Anuluj/Zapisz pozostają widoczne na węższych ekranach.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-Setup-0.2.1.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.1"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-Setup-0.2.2.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.2"
   },
   "android": {
     "nativeBuild": 46,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-0.2.1.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-0.2.2.apk"
   },
   "ota": {
-    "webBundleVersion": "0.2.1-b46",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-ota-0.2.1-b46.zip",
-    "checksum": "5f305fad385f79fab79a70de9c9e0d2db28d9e17bf92f99ac63eb359b7c085f3",
+    "webBundleVersion": "0.2.2-b46.1",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.2/MAIA-ota-0.2.2-b46.1.zip",
+    "checksum": "8c94cf020ca37e66c346554cdca6d485116201e5e07089e8c9cdf84e7e50effa",
     "minNativeBuild": 46,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
