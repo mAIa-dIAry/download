@@ -1,23 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.2.0",
-  "appVersion": "0.2.0",
-  "publishedAt": "2026-06-05T14:09:10Z",
-  "releaseNotes": "Dashboard z wykresem aktywności notatek, odświeżony edytor z podsumowaniem wpisów, nowa typografia Roboto oraz porządki w układzie ustawień i changelogu wersji.\n\n### Nowości\n\n- **Dashboard — widget systematyczności (`DailyStatsWidget`):** karta **Systematyczność** z wykresem area ostatnich 30 dni, średnią notatek dziennie i łączną liczbą wpisów; dane pobierane z lokalnej bazy po odblokowaniu dziennika.\n- **Wykres aktywności (`AbyssChart`):** komponent Abyss Design System oparty na ApexCharts — responsywna oś X z doborem etykiet, własna skala Y, tooltip z pełną datą (np. „7 maja 2026”) i skrótem dnia na osi.\n- **Strona Analiza:** karta **Raporty i narzędzia AI** z komunikatem o nadchodzących funkcjach analizy wpisów.\n- **Siatka dashboardu (`AbyssGrid`):** wspólny układ widgetów na stronie głównej i w analizie.\n- **Edytor notatek:** pasek postępu bieżącego wpisu oraz licznik zapisanych notatek; ochrona przed zapisem dwóch wpisów z tym samym znacznikiem czasu (`NoteTimestampCollisionError`).\n- **Typografia:** rodzina **Roboto** (UI) i **Roboto Mono** (kod) zamiast fontów systemowych; mixin `abyss-content` i komponent `AbyssContent` dla spójnego formatowania treści.\n- **Ustawienia — panel boczny:** blok **O aplikacji** (`AboutApp`) z ikoną kafelka, logotypem, nazwą i wersją zamiast osobnych elementów w sidebarze.\n- **Zasoby marki:** nowa ikona aplikacji w wersji tile (kafelek PWA, `AboutApp`, Android `ic_launcher`), odświeżone pozostałe ikony i favicony, splash screeny Androida oraz ikony Electrona (Windows, macOS, Linux).\n\n### Poprawki\n\n- **`AbyssChart`:** wykres dopasowuje szerokość do kontenera przy zmianie rozmiaru okna; naprawiony błąd `destroy` w `vue3-apexcharts` przy pierwszym renderze.\n- **`VersionChangelog`:** czytelniejszy układ sekcji, poprawione maskowanie treści przy zwijaniu oraz wsparcie HTML w opisie wersji.\n- **`NoteEditor`:** uproszczony układ statystyk i paska narzędzi; lepsze zachowanie scrollbara i marginesów na mobile i desktopie.\n- **Storybook:** ujednolicone style tabel w dokumentacji; drobna korekta wizualna komponentu `AbyssInfo`.",
+  "releaseTag": "v0.2.1",
+  "appVersion": "0.2.1",
+  "publishedAt": "2026-06-05T15:26:08Z",
+  "releaseNotes": "Poprawki stabilności wykresu dashboardu, wyświetlania changelogu w ustawieniach, eksportu danych oraz aktualizacji na Androidzie i Windowsie po wydaniu 0.2.0.\n\n### Poprawki\n\n- **`DailyStatsWidget`:** średnia notatek dziennie liczona od dnia pierwszej notatki, gdy użytkownik zaczął prowadzić dziennik w ostatnich 30 dniach — dni bez wpisów sprzed startu nie obniżają średniej.\n- **`AbyssChart`:** leniwe ładowanie ApexCharts w rendererze — usunięty globalny boot; naprawiony błąd Sentry `Cannot read properties of null (reading 'node')` przy starcie na Electronie i Capacitorze.\n- **Electron (Windows):** naprawiony start zainstalowanej aplikacji po buildzie produkcyjnym; changelog w ustawieniach pobierany wyłącznie w rendererze (manifest, GitHub API, Atom) — ten sam mechanizm co na Capacitorze.\n- **`VersionChangelog` / `AbyssContent`:** poprawne renderowanie HTML opisu wersji (bez surowych tagów i zbędnych pustych linii od `<br>`); naprawa legacy cache ze zescape’owanym HTML.\n- **Ustawienia — import danych:** potwierdzenie importu JSON przez `AbyssDialog` zamiast `$q.dialog`.\n- **Eksport danych:** anulowanie share traktowane jako rezygnacja (bez fałszywego błędu); na Androidzie zapis pliku przez selektor systemowy zamiast share sheet; pewniejsze wykrywanie sukcesu eksportu.\n- **Aktualizacje Android (Capacitor):** po instalacji APK wersja bundle WebView uzupełnia brakujący sufiks `-b{build}` — koniec fałszywego wymuszania OTA identycznego z wbudowanym bundle.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-Setup-0.2.0.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.0"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-Setup-0.2.1.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.1"
   },
   "android": {
-    "nativeBuild": 43,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-0.2.0.apk"
+    "nativeBuild": 46,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-0.2.1.apk"
   },
   "ota": {
-    "webBundleVersion": "0.2.0-b43",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.0/MAIA-ota-0.2.0-b43.zip",
-    "checksum": "2ea59e1ed5b4065fb2fd6c6b5e496dc0100a0ebb870fea2d20b537cf5e22fc19",
-    "minNativeBuild": 43,
+    "webBundleVersion": "0.2.1-b46",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.1/MAIA-ota-0.2.1-b46.zip",
+    "checksum": "5f305fad385f79fab79a70de9c9e0d2db28d9e17bf92f99ac63eb359b7c085f3",
+    "minNativeBuild": 46,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
