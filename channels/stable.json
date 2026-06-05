@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.2.3",
-  "appVersion": "0.2.3",
-  "publishedAt": "2026-06-05T17:30:53Z",
-  "releaseNotes": "Niezawodniejsza synchronizacja LAN po połączeniu — naprawione zrywane sesje, brak przesyłania motywu i gubione notatki przy aktywnym parowaniu (Sentry: MAIA-CAPACITOR-3, MAIA-CAPACITOR-6).\n\n### Poprawki\n\n- **Synchronizacja LAN — network status probe:** odbiorca zawsze odsyła ACK na zapytanie o status sieci (również gdy nie ma jeszcze lokalnego rekordu sieci lub `networkId` się nie zgadza). Wcześniej ciche pominięcie odpowiedzi powodowało błąd `Network status probe timed out before the remote peer responded.` i trwałe zablokowanie seedu — stąd „brak przesyłania motywu” i „gubione notatki” mimo aktywnego połączenia.\n- **Synchronizacja LAN — odblokowanie seedu:** nieudany/spóźniony probe (timeout) nie blokuje już biznesowej synchronizacji — runtime przechodzi do `queueInitialSyncSeed` + flush outboxa zamiast jedynie raportować błąd. Realny konflikt generacji/reset nadal jest poprawnie wstrzymywany (`blocked-by-network-status`).\n- **Synchronizacja LAN — utrata połączenia:** błąd `LAN sync connection is not active` przy wysyłce jest teraz traktowany jako zerwane połączenie (przejście do `idle` + reconnect hosta/joinera) zamiast twardego raportu błędu, co ogranicza szum w Sentry i przyspiesza odzyskanie sesji.",
+  "releaseTag": "v0.2.4",
+  "appVersion": "0.2.4",
+  "publishedAt": "2026-06-05T20:23:19Z",
+  "releaseNotes": "Ciche zamykanie aplikacji desktop przy aktualizacji — koniec fałszywych błędów IPC w Sentry podczas instalacji nowej wersji.\n\n### Poprawki\n\n- **Electron — IPC przy zamykaniu:** walidacja nadawcy IPC (`assertTrustedSender`) jest pomijana, gdy aplikacja jest w trakcie zamykania (`isAppQuitting`). Wcześniej `before-quit` zerował `appOrigin` (zatrzymanie serwera renderera), a renderer wciąż żyjący na np. `#/settings` odpytywał IPC podczas teardownu — skutkowało to fałszywymi błędami `Blocked IPC from untrusted sender: http://localhost:<port>/...` i nieobsłużonymi odrzuceniami w Sentry (MAIA-ELECTRON-9, MAIA-ELECTRON-A) przy `quitAndInstall` aktualizacji.\n- **Capacitor — Sentry release po OTA:** po odczycie aktywnego bundle z Capgo runtime ustawia `release`, `dist` i tagi (`app_version`, `web_bundle_version`, `native_container_version`, `native_build`) w Sentry, a `beforeSend` nadpisuje je na każdym evencie — koniec rozjazdu między UI (`0.2.3-b46.2`) a telemetrią (`org.maia.vxidfunctixn@0.2.1+46` z natywnej powłoki APK).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-Setup-0.2.3.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.3"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-Setup-0.2.4.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.4"
   },
   "android": {
     "nativeBuild": 46,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-0.2.3.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-0.2.4.apk"
   },
   "ota": {
-    "webBundleVersion": "0.2.3-b46.2",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.3/MAIA-ota-0.2.3-b46.2.zip",
-    "checksum": "134df5c221b919718c64f8d139c2187c695a1b31969025192adcba182970ebc1",
+    "webBundleVersion": "0.2.4-b46.3",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-ota-0.2.4-b46.3.zip",
+    "checksum": "08469f8dfcd7bd712d741fa8a167524f039b83c36a1cece11a0603c1e25da50b",
     "minNativeBuild": 46,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
