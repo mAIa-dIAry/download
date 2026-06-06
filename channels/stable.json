@@ -1,23 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.2.4",
-  "appVersion": "0.2.4",
-  "publishedAt": "2026-06-05T20:23:19Z",
-  "releaseNotes": "Ciche zamykanie aplikacji desktop przy aktualizacji — koniec fałszywych błędów IPC w Sentry podczas instalacji nowej wersji.\n\n### Poprawki\n\n- **Electron — IPC przy zamykaniu:** walidacja nadawcy IPC (`assertTrustedSender`) jest pomijana, gdy aplikacja jest w trakcie zamykania (`isAppQuitting`). Wcześniej `before-quit` zerował `appOrigin` (zatrzymanie serwera renderera), a renderer wciąż żyjący na np. `#/settings` odpytywał IPC podczas teardownu — skutkowało to fałszywymi błędami `Blocked IPC from untrusted sender: http://localhost:<port>/...` i nieobsłużonymi odrzuceniami w Sentry (MAIA-ELECTRON-9, MAIA-ELECTRON-A) przy `quitAndInstall` aktualizacji.\n- **Capacitor — Sentry release po OTA:** po odczycie aktywnego bundle z Capgo runtime ustawia `release`, `dist` i tagi (`app_version`, `web_bundle_version`, `native_container_version`, `native_build`) w Sentry, a `beforeSend` nadpisuje je na każdym evencie — koniec rozjazdu między UI (`0.2.3-b46.2`) a telemetrią (`org.maia.vxidfunctixn@0.2.1+46` z natywnej powłoki APK).",
+  "releaseTag": "v0.3.0",
+  "appVersion": "0.3.0",
+  "publishedAt": "2026-06-06T14:40:16Z",
+  "releaseNotes": "Gruntowne przepisanie silnika synchronizacji LAN pod kątem niezawodności i bezpieczeństwa danych: koniec z automatycznym kasowaniem notatek, wykrywanie martwych połączeń, samonaprawa stanu po restarcie oraz pełna telemetria. Dodatkowo zabezpieczenia stabilności systemu (czarny ekran Windows) i panel diagnostyczny.\n\n### Bezpieczeństwo danych\n\n- **Koniec automatycznego kasowania dziennika:** usunięto automatyczne `applyRemoteSynchronizedReset()` wywoływane przy rozjeździe `journalGeneration` — to była główna przyczyna gubionych notatek i pustego/„czarnego” UI. Rozbieżność generacji jest teraz sygnalizowana nieniszcząco (`recordNetworkResetRequired`), a reset wymaga jawnej zgody użytkownika.\n- **Obowiązkowa kopia bezpieczeństwa:** każdy destrukcyjny reset najpierw tworzy zaszyfrowaną migawkę notatek w osobnej bazie (przeżywa reset dziennika); dostępne przywracanie. Reset jest przerywany, jeśli kopia się nie powiedzie (inwariant `DESTRUCTIVE_RESET_REQUIRES_BACKUP`).\n- **Bezpieczne tombstony + audyt usunięć:** scalanie oparte na wektorach wersji — równoczesne usunięcie i edycja to konflikt do rozstrzygnięcia, a nie ciche skasowanie; każde zastosowane usunięcie trafia do odzyskiwalnego dziennika audytu.\n- **Izolacja konfliktów w inboxie:** pojedynczy konflikt nie blokuje już całej synchronizacji — pozostałe notatki są dalej stosowane (koniec „zakleszczenia” replay).\n\n### Niezawodność połączenia\n\n- **Heartbeat + keepalive:** aplikacyjny ping/pong z limitem braku aktywności wykrywa martwe (half-open) połączenia; włączony TCP keepalive na Electron i Androidzie.\n- **Reconnect z backoffem i bezpiecznikiem:** wykładniczy backoff z jitterem zamiast stałych 3 s; brak trwałego stanu `failed` — po serii porażek następuje pauza i dalsze próby. Host nie wpada już w pętlę natychmiastowego restartu (ochrona zasobów/OS).\n- **UI „połączony” oparte na realnym pulsie:** okno świeżości obniżone z 60 s do 20 s — koniec pokazywania „połączony” nad martwym gniazdem.\n\n### Stabilność systemu (Windows)\n\n- **Obsługa awarii Electrona:** handlery `render-process-gone`, `child-process-gone` (w tym GPU), `unresponsive`, `did-fail-load` z raportem do Sentry (proces główny) i kontrolowanym odzyskiwaniem renderera (z bezpiecznikiem przeciw pętli reloadów).\n- **Mitygacja GPU:** po awarii procesu GPU następne uruchomienie wyłącza akcelerację sprzętową (flaga trwała + override `MAIA_DISABLE_HW_ACCEL`/`MAIA_FORCE_HW_ACCEL`) — zabezpieczenie przed czarnym ekranem całego systemu.\n\n### Obserwowalność i diagnostyka\n\n- **Realna telemetria:** zlikwidowano „pusty” logger synchronizacji — strukturalne logi trafiają do bufora w pamięci, jako breadcrumbs do Sentry i do pakietu diagnostycznego; `reportSyncError` działa też w DEV i dołącza ostatni ślad zdarzeń. Inwarianty (`assertInvariant`) wyłapują najdrobniejsze nieprawidłowości.\n- **Samonaprawa stanu:** walidacja i naprawa liczników (lamport/kursory/zegary encji) przy starcie — „zakleszczenie” po restarcie jest rozplątywane programowo, bez czyszczenia danych.\n- **Panel diagnostyczny w Ustawieniach → Dane:** podgląd na żywo fazy połączenia, pulsu, backoffu, konfliktów oraz przycisk „Eksportuj diagnostykę”.\n- **Feature flagi (`sync.engine`):** możliwość wycofania pojedynczych zachowań lub całościowego rollbacku do trybu `v1` bez przebudowy.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-Setup-0.2.4.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.2.4"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.0/MAIA-Setup-0.3.0.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.0"
   },
   "android": {
-    "nativeBuild": 46,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-0.2.4.apk"
+    "nativeBuild": 47,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.0/MAIA-0.3.0.apk"
   },
   "ota": {
-    "webBundleVersion": "0.2.4-b46.3",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.2.4/MAIA-ota-0.2.4-b46.3.zip",
-    "checksum": "08469f8dfcd7bd712d741fa8a167524f039b83c36a1cece11a0603c1e25da50b",
-    "minNativeBuild": 46,
+    "webBundleVersion": "0.3.0-b47",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.0/MAIA-ota-0.3.0-b47.zip",
+    "checksum": "d4fa694f06fe5245bac1ecdc08a13d55901948c2aac1516022e1c4af48607e74",
+    "minNativeBuild": 47,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
