@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.3.1",
-  "appVersion": "0.3.1",
-  "publishedAt": "2026-06-06T15:48:19Z",
-  "releaseNotes": "Poprawka krytycznej „burzy ACK” na Capacitorze przy martwym gnieździe TCP oraz dokładniejsza diagnostyka aktywnego połączenia w panelu Ustawień.\n\n### Poprawki\n\n- **Koniec „burzy ACK” na martwym gnieździe (Capacitor):** ramki przychodzące są ignorowane, gdy sesja nie jest aktywnie połączona. Deterministyczne `sessionId` powodowało, że stare/half-open gniazdo wciąż dostarczało ramki — runtime próbował je potwierdzać, każde ACK kończyło się `LAN sync connection is not active`, status migał „milion razy na sekundę”, a Sentry był zalewany (MAIA-CAPACITOR-3). Nieudana wysyłka ACK jest teraz traktowana jako pojedyncza utrata połączenia (zamknięcie gniazda + reconnect), a raportowanie tego błędu jest dławione.\n- **Diagnostyka aktywnego runtime per-peer:** panel w Ustawieniach → Dane czyta fazę połączenia, backoff i puls z aktywnego runtime danego peera zamiast domyślnego (często bezczynnego) — podgląd odzwierciedla rzeczywisty stan sesji.",
+  "releaseTag": "v0.3.2",
+  "appVersion": "0.3.2",
+  "publishedAt": "2026-06-06T16:12:38Z",
+  "releaseNotes": "Szybsze ponowne łączenie po restarcie hosta — joiner uczy się aktualnego portu TCP z probe sieciowego zamiast utykać na przestarzałym endpoincie.\n\n### Poprawki\n\n- **Wymiana endpointów hosta w probe sieciowym:** host publikuje bieżące adresy `tcp://…` przy starcie sesji, a odpowiedź `network-status` niesie pole `hostEndpoints`. Joiner zapisuje je jako świeże wskazówki połączenia — po restarcie hosta (nowy port nasłuchu) nie trzeba czekać na wygasnięcie starego endpointu.\n- **Depriorytetyzacja martwych endpointów:** po dwóch nieudanych próbach połączenia endpoint schodzi na dół listy wskazówek; nowy adres z probe ma pierwszeństwo przed dawnym, choć kiedyś udanym portem.\n- **Recykling runtime przy zmianie roli/portu:** menedżer sesji usuwa i tworzy na nowo trwały runtime peera, gdy zmienia się rola (`host`/`join`) lub `preferredHostPort` — koniec prób łączenia ze starym gniazdem po przełączeniu trybu.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.1/MAIA-Setup-0.3.1.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.1"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-Setup-0.3.2.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.2"
   },
   "android": {
     "nativeBuild": 47,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.1/MAIA-0.3.1.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-0.3.2.apk"
   },
   "ota": {
-    "webBundleVersion": "0.3.1-b47.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.1/MAIA-ota-0.3.1-b47.1.zip",
-    "checksum": "fab5f654c223db0ef7c4cf490b18438bd22c0260ceab3141d710ef90a8e384b7",
+    "webBundleVersion": "0.3.2-b47.3",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-ota-0.3.2-b47.3.zip",
+    "checksum": "106524b170788580e8994ff0eefa6c562b79d0702929166afd2dad913b7ebe43",
     "minNativeBuild": 47,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
