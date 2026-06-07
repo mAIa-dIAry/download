@@ -1,23 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.3.2",
-  "appVersion": "0.3.2",
-  "publishedAt": "2026-06-06T16:12:38Z",
-  "releaseNotes": "Szybsze ponowne łączenie po restarcie hosta — joiner uczy się aktualnego portu TCP z probe sieciowego zamiast utykać na przestarzałym endpoincie.\n\n### Poprawki\n\n- **Wymiana endpointów hosta w probe sieciowym:** host publikuje bieżące adresy `tcp://…` przy starcie sesji, a odpowiedź `network-status` niesie pole `hostEndpoints`. Joiner zapisuje je jako świeże wskazówki połączenia — po restarcie hosta (nowy port nasłuchu) nie trzeba czekać na wygasnięcie starego endpointu.\n- **Depriorytetyzacja martwych endpointów:** po dwóch nieudanych próbach połączenia endpoint schodzi na dół listy wskazówek; nowy adres z probe ma pierwszeństwo przed dawnym, choć kiedyś udanym portem.\n- **Recykling runtime przy zmianie roli/portu:** menedżer sesji usuwa i tworzy na nowo trwały runtime peera, gdy zmienia się rola (`host`/`join`) lub `preferredHostPort` — koniec prób łączenia ze starym gniazdem po przełączeniu trybu.",
+  "releaseTag": "v0.3.3",
+  "appVersion": "0.3.3",
+  "publishedAt": "2026-06-07T14:32:01Z",
+  "releaseNotes": "Synchronizacja LAN w tle na Androidzie (Capacitor) — notatki i ustawienia mogą docierać do peera przy zablokowanym ekranie lub aplikacji w tle, bez czekania na ponowne otwarcie MAII.\n\n### Nowości\n\n- **Foreground Service synchronizacji (`dataSync`):** natywny `LanSyncForegroundService` utrzymuje kanał `sync` (TCP, reconnect z backoffem, keepalive) niezależnie od uśpionego WebView. Widoczna notyfikacja systemowa „MAIA — synchronizacja w sieci” podczas aktywnej sesji persistent.\n- **Bufor ramek przy uśpionym WebView:** odebrane ramki są kolejkowane natywnie (limit 256 KB, eviction FIFO) i opróżniane do JS po `onResume` (`drainBufferedFrames` → `replayBufferedInboundFrames`).\n- **Most JS ↔ FGS:** `startBackgroundSync` / `stopBackgroundSync` / `updateBackgroundSyncConfig` / `setWebViewSleeping` — start/stop FGS przy persistent session, aktualizacja endpointów po `hostEndpoints` z probe (0.3.2), sygnał „webview sleeping” przy `onPause`.\n- **Delegacja kanału sync w pluginie:** kanał `pairing` zostaje w `LanSyncPlugin`; kanał `sync` przy aktywnym FGS obsługuje `LanSyncServiceController`. `handleOnDestroy()` nie zamyka socketów sync, gdy serwis działa.\n\n### Poprawki\n\n- **`handleResume` w menedżerze sesji:** po powrocie z tła wymuszany reconnect i flush outboxa, gdy sesja jest `active`/`reconnecting`, ale transport nie jest `connected` — koniec stanu „peer offline” przy otwartej aplikacji i martwym TCP.\n- **Reconnect watchdog dla roli `join`:** session-level reconnect po 16 s bez połączenia (dotąd tylko host) — telefon jako joiner sam odtwarza sesję bez ręcznego restartu.\n- **Lifecycle Capacitor:** `onResume` drainuje bufor FGS i wywołuje `handleResume()`; `syncLocalNetworkAvailability` wznawia sesję także gdy manager jest `active`, a nie tylko `idle`/`failed`. Zwykły `pause` **nie** czyści już aktywnego klucza sync (klucz jest czyszczony przy locku dziennika) — szybszy replay po krótkim powrocie.\n- **Dokumentacja:** sekcja Android FGS w `docs/architecture/wifi-sync.md`; checklista E2E 2-urządzeniowa w `docs/raports/background-sync-e2e-2026-06-06.md`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-Setup-0.3.2.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.2"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.3/MAIA-Setup-0.3.3.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.3"
   },
   "android": {
-    "nativeBuild": 47,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-0.3.2.apk"
+    "nativeBuild": 48,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.3/MAIA-0.3.3.apk"
   },
   "ota": {
-    "webBundleVersion": "0.3.2-b47.3",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.2/MAIA-ota-0.3.2-b47.3.zip",
-    "checksum": "106524b170788580e8994ff0eefa6c562b79d0702929166afd2dad913b7ebe43",
-    "minNativeBuild": 47,
+    "webBundleVersion": "0.3.3-b48",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.3/MAIA-ota-0.3.3-b48.zip",
+    "checksum": "a97a988768f82b665246dae2e69c4ee8117162e04fc32bb2ed3b25c25fc668ea",
+    "minNativeBuild": 48,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
