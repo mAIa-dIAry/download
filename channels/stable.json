@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.3.5",
-  "appVersion": "0.3.5",
-  "publishedAt": "2026-06-07T23:12:43Z",
-  "releaseNotes": "Dopracowanie wypełnienia wykresów AbyssChart i drobna korekta etykiety restartu po aktualizacji OTA.\n\n### Zmiany UI\n\n- **AbyssChart:** gradient wypełnienia pod krzywą — jaśniejszy u góry (`opacityFrom: 0.38`), pełna przezroczystość u dołu; delikatniejsze wypełnienie bez utraty czytelności linii wykresu.\n- **Aktualizacja OTA:** etykieta `restartApp` zmieniona na **Zainstaluj** — dotyczy akcji restartu po pobraniu aktualizacji (pozostałe etykiety przycisków bez zmian).",
+  "releaseTag": "v0.3.6",
+  "appVersion": "0.3.6",
+  "publishedAt": "2026-06-07T23:26:04Z",
+  "releaseNotes": "Krytyczna poprawka utraty danych renderera Electron po restarcie / OTA (regresja widoczna po aktualizacji sync 0.3.4).\n\n### Poprawki\n\n- **Electron — utrata danych po aktualizacji (0.3.4 / OTA):** naprawiono regresję widoczną po wdrożeniu nowego transportu sync — nie przez czyszczenie kolejek sync (Genesis re-pair dotyczy wyłącznie inbox/outbox), lecz przez wyścig portu renderera przy `quitAndInstall`: dłuższy shutdown LAN runtime (0.3.4) + stary proces jeszcze trzymał zapisany port → nowa instancja wiązała się z innym `localhost` i nadpisywała `renderer-server-port.json`, przez co IndexedDB (notatki) i localStorage (motyw) wyglądały jak po czystej instalacji. Przy istniejącym zapisanym porcie aplikacja teraz wyłącznie do niego się wiąże (z ponowieniami), bez fallbacku i bez nadpisywania pliku; port renderera zwalniany jest przed dispose LAN sync przy zamykaniu.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.5/MAIA-Setup-0.3.5.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.5"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-Setup-0.3.6.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.6"
   },
   "android": {
     "nativeBuild": 52,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.5/MAIA-0.3.5.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-0.3.6.apk"
   },
   "ota": {
-    "webBundleVersion": "0.3.5-b52.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.5/MAIA-ota-0.3.5-b52.1.zip",
-    "checksum": "e0854bcb334a516f03f56f5bb0a836245992b52ce86219b49661ed7246f7f4e5",
+    "webBundleVersion": "0.3.6-b52.2",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-ota-0.3.6-b52.2.zip",
+    "checksum": "69a5622fa4a11d54f8844364a18e84e479acc61a29aec2f0365d9d7df08bc20e",
     "minNativeBuild": 52,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
