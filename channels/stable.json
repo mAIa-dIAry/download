@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.3.6",
-  "appVersion": "0.3.6",
-  "publishedAt": "2026-06-07T23:26:04Z",
-  "releaseNotes": "Krytyczna poprawka utraty danych renderera Electron po restarcie / OTA (regresja widoczna po aktualizacji sync 0.3.4).\n\n### Poprawki\n\n- **Electron — utrata danych po aktualizacji (0.3.4 / OTA):** naprawiono regresję widoczną po wdrożeniu nowego transportu sync — nie przez czyszczenie kolejek sync (Genesis re-pair dotyczy wyłącznie inbox/outbox), lecz przez wyścig portu renderera przy `quitAndInstall`: dłuższy shutdown LAN runtime (0.3.4) + stary proces jeszcze trzymał zapisany port → nowa instancja wiązała się z innym `localhost` i nadpisywała `renderer-server-port.json`, przez co IndexedDB (notatki) i localStorage (motyw) wyglądały jak po czystej instalacji. Przy istniejącym zapisanym porcie aplikacja teraz wyłącznie do niego się wiąże (z ponowieniami), bez fallbacku i bez nadpisywania pliku; port renderera zwalniany jest przed dispose LAN sync przy zamykaniu.",
+  "releaseTag": "v0.3.7",
+  "appVersion": "0.3.7",
+  "publishedAt": "2026-06-07T23:53:16Z",
+  "releaseNotes": "Poprawki UX parowania LAN na Electronie oraz etykieta restartu OTA w nawigacji desktopowej.\n\n### Poprawki\n\n- **Parowanie Electron — fałszywy „Błąd połączenia”:** timeout probe `network-status` (nieszkodliwy — sync kontynuuje) nie ustawia już statusu peera na `failed` ani nie raportuje błędu do panelu peerów; podczas bootstrapu parowania tymczasowy `lastError` pokazuje **Łączenie** zamiast **Błąd połączenia**.\n- **Modal postępu parowania:** log bootstrapu raportuje etapy smoke testu (zamknięcie sesji pairingu, start runtime, probe host/join, network-status, finalizacja) zamiast wielosekundowego milczenia na ogólnym „Synchronizacja danych…”; modal parowania (host/join) zamyka się przed otwarciem modala **Synchronizowanie**; same-network noop kończy parowanie bez zbędnego modala postępu.\n\n### Zmiany UI\n\n- **Aktualizacja OTA (desktop, nawigacja):** przycisk w pasku bocznym pokazuje **Zainstaluj** (`restartApp`) po pobraniu aktualizacji, gdy wymagany jest restart — spójnie z zakładką Aktualizacja w ustawieniach (wcześniej zawsze „Aktualizuj”).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-Setup-0.3.6.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.6"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-Setup-0.3.7.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.7"
   },
   "android": {
     "nativeBuild": 52,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-0.3.6.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-0.3.7.apk"
   },
   "ota": {
-    "webBundleVersion": "0.3.6-b52.2",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.6/MAIA-ota-0.3.6-b52.2.zip",
-    "checksum": "69a5622fa4a11d54f8844364a18e84e479acc61a29aec2f0365d9d7df08bc20e",
+    "webBundleVersion": "0.3.7-b52.4",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-ota-0.3.7-b52.4.zip",
+    "checksum": "7c831fc33a48a28294e1558c94cfc3dc59573318da02cf1083204293fec4e012",
     "minNativeBuild": 52,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
