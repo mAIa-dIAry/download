@@ -1,23 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.3.7",
-  "appVersion": "0.3.7",
-  "publishedAt": "2026-06-07T23:53:16Z",
-  "releaseNotes": "Poprawki UX parowania LAN na Electronie oraz etykieta restartu OTA w nawigacji desktopowej.\n\n### Poprawki\n\n- **Parowanie Electron — fałszywy „Błąd połączenia”:** timeout probe `network-status` (nieszkodliwy — sync kontynuuje) nie ustawia już statusu peera na `failed` ani nie raportuje błędu do panelu peerów; podczas bootstrapu parowania tymczasowy `lastError` pokazuje **Łączenie** zamiast **Błąd połączenia**.\n- **Modal postępu parowania:** log bootstrapu raportuje etapy smoke testu (zamknięcie sesji pairingu, start runtime, probe host/join, network-status, finalizacja) zamiast wielosekundowego milczenia na ogólnym „Synchronizacja danych…”; modal parowania (host/join) zamyka się przed otwarciem modala **Synchronizowanie**; same-network noop kończy parowanie bez zbędnego modala postępu.\n\n### Zmiany UI\n\n- **Aktualizacja OTA (desktop, nawigacja):** przycisk w pasku bocznym pokazuje **Zainstaluj** (`restartApp`) po pobraniu aktualizacji, gdy wymagany jest restart — spójnie z zakładką Aktualizacja w ustawieniach (wcześniej zawsze „Aktualizuj”).",
+  "releaseTag": "v0.4.0",
+  "appVersion": "0.4.0",
+  "publishedAt": "2026-06-09T22:42:39Z",
+  "releaseNotes": "**Przełom architektoniczny:** aplikacja przechodzi na zupełnie nową warstwę danych — local-first IndexedDB, store'y Pinia i prosty mechanizm synchronizacji z backendem REST. To fundament pod integrację API (konto opcjonalne, chmura, przyszłe funkcje AI), zastępujący poprzedni model szyfrowanego dziennika i synchronizacji LAN P2P.\n\n**Uwaga:** brak migracji z wcześniejszych baz zaszyfrowanego dziennika — instalacja 0.4.0 startuje z czystą lokalną bazą (`maia_local_db`). Szczegóły decyzji: [ADR-001](docs/architecture/adr-001-cloud-ready-security-deferred.md).\n\n### Nowa architektura danych\n\n- **IndexedDB `maia_local_db`:** notatki (`notes`), ustawienia użytkownika (`settings`), metadane auth (`meta`) oraz kolejka mutacji offline (`sync_queue`) — jedno źródło prawdy na urządzeniu od pierwszego uruchomienia.\n- **Store'y Pinia:** `useNotesStore`, `useSettingsStore`, `useAuthStore`, `useAppLockStore` — hydratacja przy starcie przez `initializeAppData()`; ustawienia i notatki zapisywane lokalnie, niezależnie od konta.\n- **Model notatki:** `id`, `content`, `tags`, `createdAt`, `updatedAt`; soft delete przez `deletedAt` w warstwie storage; paginacja i chunkowanie długich treści.\n- **Model ustawień (`UserSettings`):** preset gradientu, zoom aplikacji, app lock, floating bubble (Android); kolory gradientu wyliczane z presetu, nie zapisywane osobno w bazie.\n\n### Integracja API (fundament)\n\n- **Opcjonalne konto JWT:** rejestracja / logowanie bez blokowania pierwszego użycia offline; tokeny w `meta.auth`.\n- **Kolejka sync:** lokalne mutacje notatek trafiają do `sync_queue` i są odtwarzane na REST (`POST` / `PUT` / `DELETE`) po powrocie online; import lokalnych notatek przy pierwszym logowaniu (`POST /notes/import`), merge z chmurą last-write-wins.\n- **Ustawienia w chmurze:** `PATCH /settings` po zmianie lokalnej, gdy API skonfigurowane (`VITE_API_BASE_URL`) i użytkownik zalogowany.\n- **Kontrakt API:** udokumentowany w [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md) — backend w osobnym repozytorium.\n\n### Usunięte / wycofane\n\n- Synchronizacja LAN (parowanie Wi‑Fi, envelope, foreground service sync), E2EE dziennika, recovery codes i materiał sesji sync — model niezgodny z kierunkiem cloud-ready (por. ADR-001).\n- Dokumentacja LAN i szyfrowania oznaczona jako deprecated; aktualny opis przepływu danych: [`docs/architecture/data-and-api.md`](docs/architecture/data-and-api.md).\n\n### Poprawki i UX\n\n- **Preloader (`index.html`):** gradient skeletonu odczytywany z mirroru `localStorage` (sync przy zapisie ustawień) z fallbackiem IndexedDB — brak migania domyślnego motywu przed startem Vue.\n- **Dokumentacja stanu aplikacji:** [`docs/architecture/application-state-and-cache.md`](docs/architecture/application-state-and-cache.md) — store'y, pola encji, warstwy cache.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-Setup-0.3.7.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.3.7"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.0/MAIA-Setup-0.4.0.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.0"
   },
   "android": {
-    "nativeBuild": 52,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-0.3.7.apk"
+    "nativeBuild": 53,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.0/MAIA-0.4.0.apk"
   },
   "ota": {
-    "webBundleVersion": "0.3.7-b52.4",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.3.7/MAIA-ota-0.3.7-b52.4.zip",
-    "checksum": "7c831fc33a48a28294e1558c94cfc3dc59573318da02cf1083204293fec4e012",
-    "minNativeBuild": 52,
+    "webBundleVersion": "0.4.0-b53",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.0/MAIA-ota-0.4.0-b53.zip",
+    "checksum": "b36d90053e92aef594692d7757308341665eb6f0418ea1bd512b20e0379dd095",
+    "minNativeBuild": 53,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
