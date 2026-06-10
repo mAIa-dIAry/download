@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.1",
-  "appVersion": "0.4.1",
-  "publishedAt": "2026-06-10T19:57:16Z",
-  "releaseNotes": "Dopracowanie zakładki Aktualizacja, workflow deweloperski Androida oraz utwardzenie lokalnej bazy IndexedDB po przejściu na architekturę 0.4.0.\n\n### Zmiany UI\n\n- **Ustawienia → Aktualizacja — aktualna wersja:** zamiast kafelków i changelogu wyświetlany jest sam numer wersji — na Electronie `releaseVersion`, na Capacitorze `webBundleVersion` (wersja + build + rewizja OTA w jednym polu).\n- **Ustawienia → Aktualizacja — stan:** pod statusem widoczne jest **ostatnie sprawdzenie aktualizacji** (data i godzina); changelog pozostaje tylko przy dostępnej nowej wersji.\n- **AboutApp:** badge **DEV** przy buildach deweloperskich (Vite `import.meta.env.DEV` lub `applicationId` z sufiksem `.dev` na Androidzie).\n\n### Nowości (deweloperskie)\n\n- **Android dev obok release:** build `debug` instaluje `org.maia.vxidfunctixn.dev` (**MAIA Dev**) z osobną ikoną/nazwą; `release` zostaje na `org.maia.vxidfunctixn`.\n- **Uruchamianie dev na urządzeniu:** `yarn dev:android` oraz skrypty `tools/launch-android-dev.mjs` i `tools/android-studio-dev-run-config.mjs` — sync konfiguracji Capacitor z adresem serwera dev i gotowa konfiguracja Run w Android Studio.\n- **Store `useUpdateStore`:** wspólny `lastCheckAt` dla Capacitor i Electron (persist w `localStorage`, limit auto-checku raz na 24 h).\n\n### Poprawki\n\n- **IndexedDB `maia_local_db`:** wersja schematu podbita do **2**; wspólna ścieżka otwarcia bazy w `index.html` (preloader gradientu) i `local-db.ts` — brak pustej bazy przy pierwszym upgrade i spójne tworzenie store'ów (`notes`, `settings`, `meta`, `sync_queue`).\n- **Fingerprint release natywnego:** `tools/native-release-fingerprint.mjs` ignoruje efemeryczną tożsamość dev (`applicationIdSuffix`, `server.url` w `capacitor.config.json`) — sam build WebView nie podbija `versionCode`.\n- **Dokumentacja stanu aplikacji:** odświeżony opis warstw cache i store'ów w [`docs/architecture/application-state-and-cache.md`](docs/architecture/application-state-and-cache.md).\n\n### Techniczne\n\n- Usunięto nieużywaną zależność `ssl-skip`.\n- Usunięto komponent `UpdateVersionPanel` (zastąpiony uproszczonym widokiem wersji w `SettingsUpdateTab`).",
+  "releaseTag": "v0.4.2",
+  "appVersion": "0.4.2",
+  "publishedAt": "2026-06-10T20:22:10Z",
+  "releaseNotes": "Dodanie rejestrowania błędów we wczesnej fazie ładowania aplikacji",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.1/MAIA-Setup-0.4.1.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.1"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-Setup-0.4.2.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.2"
   },
   "android": {
     "nativeBuild": 53,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.1/MAIA-0.4.1.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-0.4.2.apk"
   },
   "ota": {
-    "webBundleVersion": "0.4.1-b53.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.1/MAIA-ota-0.4.1-b53.1.zip",
-    "checksum": "3dcb69ba241acc51a8e15f3a006afb64f122a8e463262fe0cc77b248f133a804",
+    "webBundleVersion": "0.4.2-b53.2",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-ota-0.4.2-b53.2.zip",
+    "checksum": "b12c19221102a1c088eb12f54ed72cda8c396ce625b7e1b7fa2828bf326601d0",
     "minNativeBuild": 53,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
