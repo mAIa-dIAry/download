@@ -1,23 +1,23 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.2",
-  "appVersion": "0.4.2",
-  "publishedAt": "2026-06-10T20:22:10Z",
-  "releaseNotes": "Dodanie rejestrowania błędów we wczesnej fazie ładowania aplikacji",
+  "releaseTag": "v0.4.3",
+  "appVersion": "0.4.3",
+  "publishedAt": "2026-06-10T20:37:46Z",
+  "releaseNotes": "Naprawa pustego ekranu po zniknięciu skeletonu na release APK (Capacitor).\n\n### Poprawki\n\n- **IndexedDB preloader (`index.html`):** po odczycie gradientu połączenie `maia_local_db` jest zamykane — wcześniej blokowało upgrade schematu v2 w Vue i wieszało router (skeleton znikał, treść aplikacji nigdy się nie renderowała).\n- **Start aplikacji:** synchronizacja auth po hydracji nie blokuje już `initializeAppData()`; router ma limit czasu (15 s) na pierwsze ładowanie danych, żeby shell UI pojawił się nawet przy wolnym IDB lub sieci.\n- **`local-db.ts`:** log przy `onblocked` oraz reset `dbPromise` po błędzie otwarcia bazy.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-Setup-0.4.2.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.2"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-Setup-0.4.3.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.3"
   },
   "android": {
-    "nativeBuild": 53,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-0.4.2.apk"
+    "nativeBuild": 54,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-0.4.3.apk"
   },
   "ota": {
-    "webBundleVersion": "0.4.2-b53.2",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.2/MAIA-ota-0.4.2-b53.2.zip",
-    "checksum": "b12c19221102a1c088eb12f54ed72cda8c396ce625b7e1b7fa2828bf326601d0",
-    "minNativeBuild": 53,
+    "webBundleVersion": "0.4.3-b54",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-ota-0.4.3-b54.zip",
+    "checksum": "1e57a3eb42bd483cf38c563f8dec46b68b7f13f82af829085df10811b5bf791e",
+    "minNativeBuild": 54,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
     "otaEnabled": true
