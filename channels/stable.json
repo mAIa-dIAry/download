@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.3",
-  "appVersion": "0.4.3",
-  "publishedAt": "2026-06-10T20:37:46Z",
-  "releaseNotes": "Naprawa pustego ekranu po zniknięciu skeletonu na release APK (Capacitor).\n\n### Poprawki\n\n- **IndexedDB preloader (`index.html`):** po odczycie gradientu połączenie `maia_local_db` jest zamykane — wcześniej blokowało upgrade schematu v2 w Vue i wieszało router (skeleton znikał, treść aplikacji nigdy się nie renderowała).\n- **Start aplikacji:** synchronizacja auth po hydracji nie blokuje już `initializeAppData()`; router ma limit czasu (15 s) na pierwsze ładowanie danych, żeby shell UI pojawił się nawet przy wolnym IDB lub sieci.\n- **`local-db.ts`:** log przy `onblocked` oraz reset `dbPromise` po błędzie otwarcia bazy.",
+  "releaseTag": "v0.4.4",
+  "appVersion": "0.4.4",
+  "publishedAt": "2026-06-10T21:12:04Z",
+  "releaseNotes": "Naprawa fałszywie „udanych” buildów Android release, które kopiowały stary APK pod nową nazwą pliku.\n\n### Poprawki\n\n- **`build-android-release.mjs`:** przed `assembleProductionRelease` uruchamiane jest `:app:clean`, żeby Gradle nie zostawiał `packageProductionRelease` jako `UP-TO-DATE` po odświeżeniu `src-capacitor/www`.\n- **Weryfikacja artefaktu:** build failuje, gdy `output-metadata.json` APK nie zgadza się z `versionCode` / `versionName` w `build.gradle` (np. APK nadal `0.4.0` przy `package.json` `0.4.4`).\n- **Ścieżka APK:** skrypty release czytają artefakt z `apk/production/release` (wariant `productionRelease`), nie z przestarzałego `apk/release`.\n- **Runtime:** usunięto tymczasową instrumentację startu (watchdog UI, bufor błędów w `index.html`, wczesny init Sentry, nieblokujący boot Capacitor) — zostaje fix zamknięcia połączenia IndexedDB w preloaderze.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-Setup-0.4.3.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.3"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-Setup-0.4.4.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.4"
   },
   "android": {
     "nativeBuild": 54,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-0.4.3.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-0.4.4.apk"
   },
   "ota": {
-    "webBundleVersion": "0.4.3-b54",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.3/MAIA-ota-0.4.3-b54.zip",
-    "checksum": "1e57a3eb42bd483cf38c563f8dec46b68b7f13f82af829085df10811b5bf791e",
+    "webBundleVersion": "0.4.4-b54.1",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-ota-0.4.4-b54.1.zip",
+    "checksum": "52f6398dff32c62cab97556003b86330e2db8f21c18940aac0b70f1daf5c6959",
     "minNativeBuild": 54,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
