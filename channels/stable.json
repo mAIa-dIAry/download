@@ -1,22 +1,22 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.4",
-  "appVersion": "0.4.4",
-  "publishedAt": "2026-06-10T21:12:04Z",
-  "releaseNotes": "Naprawa fałszywie „udanych” buildów Android release, które kopiowały stary APK pod nową nazwą pliku.\n\n### Poprawki\n\n- **`build-android-release.mjs`:** przed `assembleProductionRelease` uruchamiane jest `:app:clean`, żeby Gradle nie zostawiał `packageProductionRelease` jako `UP-TO-DATE` po odświeżeniu `src-capacitor/www`.\n- **Weryfikacja artefaktu:** build failuje, gdy `output-metadata.json` APK nie zgadza się z `versionCode` / `versionName` w `build.gradle` (np. APK nadal `0.4.0` przy `package.json` `0.4.4`).\n- **Ścieżka APK:** skrypty release czytają artefakt z `apk/production/release` (wariant `productionRelease`), nie z przestarzałego `apk/release`.\n- **Runtime:** usunięto tymczasową instrumentację startu (watchdog UI, bufor błędów w `index.html`, wczesny init Sentry, nieblokujący boot Capacitor) — zostaje fix zamknięcia połączenia IndexedDB w preloaderze.",
+  "releaseTag": "v0.4.5",
+  "appVersion": "0.4.5",
+  "publishedAt": "2026-06-11T21:55:12Z",
+  "releaseNotes": "Blokada aplikacji w ustawieniach Bezpieczeństwo (PIN, biometria, Windows Hello, autoblokowanie) oraz nowy model `device` w notatkach zamiast `tags`.\n\n### Nowości\n\n- **Ustawienia → Bezpieczeństwo:** jeden dropdown **Rodzaj ochrony** — _Brak zabezpieczeń_, _PIN_, a na urządzeniach z obsługą także _Odcisk palca_ (Capacitor) lub _Windows Hello_ (Electron / Windows). Wybór PIN bez skonfigurowanego kodu otwiera modal ustawienia; enrollment biometrii wymaga potwierdzenia na urządzeniu.\n- **Blokada PIN:** czterocyfrowy kod, hash w `SecurityMeta` (IndexedDB); opcjonalna **chaotyczna klawiatura** (losowy układ cyfr + przycisk ponownego tasowania).\n- **Autoblokowanie:** włączane po wybraniu dowolnej ochrony; czas bezczynności (1 / 5 / 15 / 30 min) ustawiany suwakiem jak zoom w Dostępności; timer pauzuje się w tle i startuje od nowa po powrocie do aplikacji.\n- **Ekran blokady:** dialog w `MainLayout` (PIN lub biometria / Windows Hello), przycisk **Zablokuj** w nawigacji, pasek `SessionTimeGlow` odliczający do autoblokowania, wygaszenie treści i nawigacji przez `LockOpacity`.\n- **Windows Hello (Electron):** WebAuthn + bezpieczne przechowywanie credentiali w procesie main (`device-security` IPC).\n- **Komponenty UI:** `AbyssAppLock`, `AbyssPinInput`, `AbyssNumericKeypad`, `LockOpacity`, `SessionTimeGlow`; wariant `AbyssDialog--compact` pod klawiaturę PIN.\n\n### Zmiany w danych\n\n- **Notatki:** pole `tags` usunięte; każda notatka ma wymagany obiekt `device: { name, type }` (`desktop` | `mobile` | `web`), uzupełniany przy zapisie przez `resolveNoteDevice()`. Zaktualizowany kontrakt API w [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md).\n\n### Poprawki\n\n- Zmiana typu zabezpieczeń w ustawieniach **nie blokuje** od razu aplikacji (blokada tylko przy starcie z włączoną ochroną, ręcznym „Zablokuj”, autoblokowaniu lub zdarzeniu systemowym na Electronie).\n- Modal PIN ma stałą szerokość, przycisk zamknięcia przy ustawianiu kodu oraz etykiety suwaka autoblokowania bez zbędnego łamania linii (`white-space: nowrap` na markerach `AbyssSlider`).\n\n### Techniczne\n\n- Store `useAppLockStore`, composable `useAppAutoLock`, warstwa `src/app-lock/` i `src/device-security/`; ustawienia `pinLockEnabled`, `appLockEnabled`, `autoLockEnabled`, `pinChaosKeyboardEnabled` w `UserSettings`.\n- Refaktor narzędzi release: `build-ota-bundle.mjs`, `sentry-release.mjs` (wersja web bundle z planu następnego release'u); `inject-gradient-presets.ts` w pipeline preloadera.\n- Odświeżona dokumentacja stanu aplikacji w [`docs/architecture/application-state-and-cache.md`](docs/architecture/application-state-and-cache.md).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-Setup-0.4.4.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.4"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.5/MAIA-Setup-0.4.5.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.5"
   },
   "android": {
     "nativeBuild": 54,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-0.4.4.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.5/MAIA-0.4.5.apk"
   },
   "ota": {
-    "webBundleVersion": "0.4.4-b54.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.4/MAIA-ota-0.4.4-b54.1.zip",
-    "checksum": "52f6398dff32c62cab97556003b86330e2db8f21c18940aac0b70f1daf5c6959",
+    "webBundleVersion": "0.4.5-b54.2",
+    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.5/MAIA-ota-0.4.5-b54.2.zip",
+    "checksum": "62b8a4bb90e51715e9206acb6178575b9d6e89ce273d423702794182aa6349fd",
     "minNativeBuild": 54,
     "targetNativeBuild": null,
     "requiresNativeUpdate": false,
