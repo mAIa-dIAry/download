@@ -1,25 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.7",
-  "appVersion": "0.4.7",
-  "publishedAt": "2026-06-15T18:08:14Z",
-  "releaseNotes": "Release buildy (Android, Windows, OTA) łączą się z wdrożonym backendem MAIA na VPS — synchronizacja z chmurą i konto działają poza trybem deweloperskim.\n\n### Nowości\n\n- **Produkcyjne API w buildzie:** `VITE_API_BASE_URL` w `.env.production` wskazuje na publiczny endpoint HTTPS backendu (`https://vps-2a0223a4.vps.ovh.net`). Wartość jest wbudowana w artefakt przy `quasar build` / `yarn build` — release nie wymaga ręcznej konfiguracji URL po instalacji.\n- **Konto i synchronizacja w release:** w buildach produkcyjnych dostępne są rejestracja, logowanie, edycja profilu, import lokalnych notatek przy pierwszym logowaniu, kolejka sync offline i `PATCH /settings` po zalogowaniu. W 0.4.6 release bez URL działał wyłącznie lokalnie (`isApiConfigured() === false`).\n- **Ustawienia → Konto / Dane:** zamiast komunikatu o braku API — normalny flow chmury (gdy backend jest dostępny i `ALLOW_REGISTRATION` na serwerze pozwala na rejestrację).\n\n### Wymagania infrastruktury\n\n- Backend na VPS (Docker Compose + Caddy, HTTPS na hostname OVH) musi być uruchomiony przed testem release; `CORS_ORIGINS` na serwerze musi zawierać origin klienta (Capacitor `capacitor://`, Electron `file://` lub docelowa domena SPA).\n- **Base URL klienta MAIA:** root hosta (`https://vps-2a0223a4.vps.ovh.net`), nie ścieżka panelu admin (`/admin/api/v1`) — aplikacja woła `/auth`, `/notes`, `/settings`, `/devices`.\n\n### Techniczne\n\n- Zmiana tylko w `.env.production` (nie commituj sekretów Sentry); `.env.production.example` nadal pokazuje placeholder `https://api.twoja-domena.pl` dla forków / innych środowisk.\n- `SENTRY_ENVIRONMENT=production` w tym samym pliku — raporty z release trafiają do środowiska produkcyjnego Sentry.",
+  "releaseTag": "v0.4.8",
+  "appVersion": "0.4.8",
+  "publishedAt": "2026-06-15T22:37:07Z",
+  "releaseNotes": "Uproszczony model aktualizacji na Androidzie (koniec OTA WebView), spójna konfiguracja API z prefiksem `/backend/api/v1` oraz pull-to-refresh w archiwum notatek.\n\n### Nowości\n\n- **Archiwum — pull-to-refresh:** przeciągnięcie listy w dół odświeża widok — przy zalogowanym koncie i dostępnym API synchronizuje notatki z chmurą (`syncAfterLogin`), w przeciwnym razie przeładowuje dane z IndexedDB.\n- **Konfiguracja API:** zmienne `API_BASE_URL`, `API_PREFIX` (domyślnie `/backend/api/v1`) i `USE_DEV_API` zastępują wcześniejszy model oparty wyłącznie o `VITE_API_BASE_URL`. Release woła pełny URL backendu (np. `https://…/backend/api/v1`); dev z `USE_DEV_API=true` korzysta z origin Quasar + proxy do lokalnego Fastify.\n- **Dev — lokalny backend:** gdy w dev nie ustawiono zdalnego URL, aplikacja sonduje dostępność proxy → Fastify przy starcie — bez działającego API konto i sync pozostają w trybie lokalnym zamiast wysyłać requesty w próżnię.\n- **Dev — Electron + VPS:** przy `USE_DEV_API=false` proces main wstrzykuje nagłówki CORS dla skonfigurowanego `API_BASE_URL`, żeby renderer mógł wołać produkcyjne API bez błędów cross-origin (Capacitor WebView nie wymaga tego obejścia).\n\n### Zmiany\n\n- **Android — aktualizacje:** usunięto `@capgo/capacitor-updater` i cały pipeline OTA WebView (`build-ota-bundle`, `webBundleVersion`). Sprawdzanie wersji opiera się na manifeście kanału (`stable.json`) i semver APK — dostępna nowsza wersja kieruje na stronę pobierania lub bezpośredni link do APK, bez hot-reload bundle w WebView.\n- **Wersja aplikacji:** jeden numer `VITE_APP_RELEASE_VERSION` / semver kontenera natywnego — koniec rozdzielenia „wersja WebView” vs „wersja APK” w UI i Sentry.\n- **Klient HTTP:** `ApiFetchError` ze snapshotem żądania i odpowiedzi (redakcja nagłówków wrażliwych), spójne logowanie błędów sieci i HTTP; `authStore.syncAfterLogin` nie przerywa flow przy oczekiwanych błędach API.\n\n### Poprawki\n\n- **Produkcyjny URL API:** `.env.production` wskazuje na pełną ścieżkę REST (`…/backend/api/v1`), zgodnie z routingiem backendu na VPS — naprawia wywołania `/auth`, `/notes` itd. po wdrożeniu panelu admin pod `/backend/api/v1`.\n- **Proxy dev:** Quasar przepisuje ścieżki z prefiksem `API_PREFIX`; dla lokalnego Fastify bez prefiksu można wyłączyć zdejmowanie prefixu (`DEV_LOCAL_API_STRIP_PREFIX=false`).\n\n### Techniczne\n\n- Narzędzia build: `resolve-api-base-url.mjs`, `maia-api-prefix.mjs`; uproszczony fingerprint release i manifest pobierania (bez wpisów OTA).\n- Zaktualizowany opis kontraktu w [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.7/MAIA-Setup-0.4.7.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.7"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.8/MAIA-Setup-0.4.8.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.8"
   },
   "android": {
-    "nativeBuild": 57,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.7/MAIA-0.4.7.apk"
-  },
-  "ota": {
-    "webBundleVersion": "0.4.7-b57.1",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.7/MAIA-ota-0.4.7-b57.1.zip",
-    "checksum": "e6804ca2e90f8d30c87b0d09617b266ff60d6d410a992565bc90388dafb22b59",
-    "minNativeBuild": 57,
-    "targetNativeBuild": null,
-    "requiresNativeUpdate": false,
-    "otaEnabled": true
+    "nativeBuild": 58,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.8/MAIA-0.4.8.apk"
   }
 }
