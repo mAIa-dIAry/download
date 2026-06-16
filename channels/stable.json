@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.9",
-  "appVersion": "0.4.9",
-  "publishedAt": "2026-06-15T23:00:22Z",
-  "releaseNotes": "Poprawki rejestracji i logowania — oddzielona synchronizacja notatek, pewniejsza rejestracja urządzenia oraz normalizacja starych notatek przed wysyłką do chmury.\n\n### Poprawki\n\n- **Konto — rejestracja urządzenia:** po logowaniu i rejestracji aplikacja wysyła `PUT /devices/current` z poprawnym payloadem API (UUID `deviceId`, typ `desktop` / `mobile` / `web`). Wcześniej błędny format lub typ `unknown` mógł odrzucać żądanie — urządzenie nie trafiało do konta użytkownika.\n- **Konto — błędy syncu poza modalem:** utworzenie konta i import notatek to osobne kroki. Błąd synchronizacji (np. walidacja starych notatek) nie blokuje już modala rejestracji ani logowania — konto zostaje utworzone, a komunikat błędu syncu pojawia się w **Ustawienia → Dane**.\n- **Synchronizacja — normalizacja urządzenia w notatkach:** przed importem do chmury notatki bez poprawnego `device` (pusty UUID, typ `unknown`) dostają bieżące urządzenie i są zapisywane lokalnie — koniec błędów walidacji przy pierwszym logowaniu ze starym dziennikiem.\n- **Release:** `yarn release` nie wymaga już artefaktu OTA ZIP — wystarczą APK, installer Windows, blockmap i `latest.yml`.\n\n### Zmiany\n\n- **Store `useSyncStore`:** import lokalnych notatek, merge z chmurą, `lastError` i stan `isSyncing` — wywoływany w tle po auth, przy starcie aplikacji, powrocie online i pull-to-refresh w archiwum.\n- **Ustawienia → Dane:** widoczny błąd ostatniej synchronizacji oraz komunikat „Trwa synchronizacja notatek z chmurą…”.\n\n### Techniczne\n\n- Narzędzia: `toApiDevicePayload`, `normalizeNotesForSync` w `noteDevice.ts`; testy `sync.store.spec.ts`.\n- **Android dev:** `server.url` w `capacitor.config.json` oraz plugin `@jcesarmobile/ssl-skip` dla lokalnego HTTPS w WebView.",
+  "releaseTag": "v0.4.10",
+  "appVersion": "0.4.10",
+  "publishedAt": "2026-06-16T00:06:43Z",
+  "releaseNotes": "Naprawa przewijania i odświeżania archiwum notatek na mobile — lista nie blokuje się już na dolnej krawędzi, a gesty odświeżania i odkrywania dat w timeline działają równolegle.\n\n### Poprawki\n\n- **Archiwum — scroll na dole listy:** usunięto konflikt zagnieżdżonych kontenerów scroll (`AbyssTemplate` + wewnętrzna lista). Strona archiwum korzysta wyłącznie ze scrolla listy wpisów — swipe w górę (starsze notatki) działa, gdy widok jest przypięty do najnowszych wpisów.\n- **Archiwum — odświeżanie bez fałszywych triggerów:** programatyczne przewinięcie na dół (`scrollToBottom`, doładowanie historii) nie uruchamia już synchronizacji; mikroskopijne zmiany `scrollTop` na krawędzi nie wywołują odświeżenia dzięki progowi `BOTTOM_REFRESH_SCROLL_DELTA`.\n- **Archiwum — odświeżanie gestem przy krawędzi:** przywrócono `v-touch-pan.up` (Quasar) — gdy lista jest już na dole i zwykły event `scroll` nie łapie overscrollu, pociągnięcie w górę uruchamia odświeżenie z podglądem loadera. Równolegle działa odświeżanie przez `scroll` (rozpęd w dół w strefie dolnej) oraz `wheel` na desktopie.\n- **Archiwum — timeline na mobile:** bez `q-pull-to-refresh` / `q-infinite-scroll` na liście — poziomy swipe dat w `AbyssTimeline` (`v-touch-pan.horizontal`) nie koliduje z pionowym scrollowaniem.\n\n### Techniczne\n\n- `MainLayout`: `content-scrollable` wyłączone dla trasy `archive` (jak w edytorze).\n- `ArchivePage`: `overscroll-behavior: contain`, `applyProgrammaticScrollTop`, osobna ścieżka gestu dolnej krawędzi i scrollowego odświeżania.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.9/MAIA-Setup-0.4.9.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.9"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.10/MAIA-Setup-0.4.10.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.10"
   },
   "android": {
-    "nativeBuild": 59,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.9/MAIA-0.4.9.apk"
+    "nativeBuild": 60,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.10/MAIA-0.4.10.apk"
   }
 }
