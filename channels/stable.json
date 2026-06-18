@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.11",
-  "appVersion": "0.4.11",
-  "publishedAt": "2026-06-16T16:05:32Z",
-  "releaseNotes": "Produkcyjne API w Electronie na Windows oraz pełniejsze raportowanie błędów sieci i runtime do Sentry.\n\n### Poprawki\n\n- **Electron release — API:** wbudowany renderer (`http://localhost:<port>`) mógł wołać VPS tylko w dev — Chromium blokował cross-origin fetch (`Failed to fetch`). Proces main wstrzykuje nagłówki CORS dla skonfigurowanego `VITE_API_BASE_URL` także w buildzie produkcyjnym (origin loopback z `appOrigin` po starcie serwera renderera).\n- **Sentry — błędy runtime:** `ApiFetchError` (sieć i HTTP) trafia do Sentry przez wspólny reporter; dodano globalne handlery `unhandledrejection` i `error` w rendererze.\n\n### Techniczne\n\n- `setupElectronRemoteApiCorsBypass` zastępuje dev-only bypass; walidacja zaufanych originów loopback (`localhost`, `127.0.0.1`).\n- `runtimeErrorReporter`: rejestracja reportera w boot Sentry, integracja z `logFetchError`.",
+  "releaseTag": "v0.4.12",
+  "appVersion": "0.4.12",
+  "publishedAt": "2026-06-18T17:09:15Z",
+  "releaseNotes": "In-app pobieranie i instalacja APK na Androidzie — flow analogiczny do aktualizacji desktopowej (sprawdź → pobierz z postępem → zainstaluj).\n\n### Nowości\n\n- **Android — aktualizacja in-app:** po wykryciu nowszej wersji w manifeście `stable.json` aplikacja pobiera APK z `android.apkUrl` w tle, pokazuje postęp w **Ustawienia → Aktualizacja** i w sidebarze mobile, a po pobraniu uruchamia systemowy instalator Androida.\n- **Plugin natywny `ApkUpdate`:** własny plugin Capacitor (pobieranie HTTPS do cache, event `downloadProgress`, instalacja przez `FileProvider`) — bez zewnętrznych bibliotek npm do APK update.\n\n### Zmiany\n\n- **Ustawienia → Aktualizacja (mobile):** przycisk główny przechodzi przez fazy `available → downloading → downloaded → install`, jak na Windowsie; „Strona pobierania” pozostaje fallbackiem przy braku `apkUrl` lub problemach z uprawnieniem.\n- **Uprawnienia Android:** dodano `REQUEST_INSTALL_PACKAGES`; ścieżka cache `updates/` w `FileProvider` dla lokalnego pliku APK.\n\n### Techniczne\n\n- Composable [`useCapacitorUpdate`](src/composables/useCapacitorUpdate.ts), typy w [`src/types/update.ts`](src/types/update.ts), plugin [`src/plugins/ApkUpdate.ts`](src/plugins/ApkUpdate.ts) + [`ApkUpdatePlugin.java`](src-capacitor/android/app/src/main/java/org/maya/vxidfunctixn/apkupdate/ApkUpdatePlugin.java).\n- Zaktualizowana procedura release: [`docs/architecture/release-and-update-procedure.md`](docs/architecture/release-and-update-procedure.md).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.11/MAIA-Setup-0.4.11.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.11"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.12/MAIA-Setup-0.4.12.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.12"
   },
   "android": {
-    "nativeBuild": 61,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.11/MAIA-0.4.11.apk"
+    "nativeBuild": 62,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.12/MAIA-0.4.12.apk"
   }
 }
