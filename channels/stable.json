@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.12",
-  "appVersion": "0.4.12",
-  "publishedAt": "2026-06-18T17:09:15Z",
-  "releaseNotes": "In-app pobieranie i instalacja APK na Androidzie — flow analogiczny do aktualizacji desktopowej (sprawdź → pobierz z postępem → zainstaluj).\n\n### Nowości\n\n- **Android — aktualizacja in-app:** po wykryciu nowszej wersji w manifeście `stable.json` aplikacja pobiera APK z `android.apkUrl` w tle, pokazuje postęp w **Ustawienia → Aktualizacja** i w sidebarze mobile, a po pobraniu uruchamia systemowy instalator Androida.\n- **Plugin natywny `ApkUpdate`:** własny plugin Capacitor (pobieranie HTTPS do cache, event `downloadProgress`, instalacja przez `FileProvider`) — bez zewnętrznych bibliotek npm do APK update.\n\n### Zmiany\n\n- **Ustawienia → Aktualizacja (mobile):** przycisk główny przechodzi przez fazy `available → downloading → downloaded → install`, jak na Windowsie; „Strona pobierania” pozostaje fallbackiem przy braku `apkUrl` lub problemach z uprawnieniem.\n- **Uprawnienia Android:** dodano `REQUEST_INSTALL_PACKAGES`; ścieżka cache `updates/` w `FileProvider` dla lokalnego pliku APK.\n\n### Techniczne\n\n- Composable [`useCapacitorUpdate`](src/composables/useCapacitorUpdate.ts), typy w [`src/types/update.ts`](src/types/update.ts), plugin [`src/plugins/ApkUpdate.ts`](src/plugins/ApkUpdate.ts) + [`ApkUpdatePlugin.java`](src-capacitor/android/app/src/main/java/org/maya/vxidfunctixn/apkupdate/ApkUpdatePlugin.java).\n- Zaktualizowana procedura release: [`docs/architecture/release-and-update-procedure.md`](docs/architecture/release-and-update-procedure.md).",
+  "releaseTag": "v0.4.13",
+  "appVersion": "0.4.13",
+  "publishedAt": "2026-06-18T20:12:11Z",
+  "releaseNotes": "Archiwum notatek korzysta z komponentu **AbyssReload** — odświeżanie od dołu listy gestem scrolla, spójny wskaźnik ładowania i poprawiony układ scrolla na desktopie i mobile.\n\n### Nowości\n\n- **AbyssReload (Abyss Design):** przewijany kontener z loaderami u góry i u dołu listy; aktywacja odświeżenia przy progu scrollTop (domyślnie 8 px), fade ikony → spinner, płynne chowanie loadera po zakończeniu ładowania.\n- **Archiwum — odświeżanie od dołu:** zamiast własnego pull-to-refresh i gestów `v-touch-pan` lista używa `AbyssReload` z wyłączonym odświeżaniem od góry; synchronizacja uruchamia się po dociągnięciu scrolla do dolnej krawędzi.\n\n### Zmiany\n\n- **Archiwum — układ listy:** odstępy treści od loaderów przez propsy `paddingTop` / `paddingBottom` (24 px desktop, 12 px mobile u góry); na mobile w portrait dodatkowy padding zewnętrzny wskaźnika (`indicatorPadding*`, 12 px).\n- **Archiwum — minimalny czas loadera:** `minLoadingTime` 1 s — spinner nie znika natychmiast po szybkim `refresh()`, animacja chowania loadera ma czas na odtworzenie.\n- **Archiwum — widok kompaktowy timeline:** `clip-path` na viewporcie listy (24 px desktop / 8 px mobile, wg `Platform.is.mobile`) ukrywa wystające daty po lewej bez obcinania treści wpisów.\n- **Doładowanie historii u góry** bez zmian — starsze notatki ładują się przy scrollu w górę, niezależnie od odświeżania `AbyssReload`.\n\n### Poprawki\n\n- **Archiwum — scroll i overflow:** naprawiony poziomy pasek przewijania u dołu; zachowany hack layoutu (`height` + ujemny `margin-bottom` sekcji listy); pionowy scrollbar tylko w viewporcie listy.\n- **Archiwum — pusty stan i prepend:** spinner przy pierwszym ładowaniu i przy doładowywaniu starszej historii u góry przez `AbyssReloadIndicator`.\n\n### Techniczne\n\n- [`ArchivePage.vue`](src/pages/ArchivePage.vue): integracja `AbyssReload`, usunięcie `TouchPan`, cooldownów i ręcznych slotów loaderów; `scrollToBottomAnchor` deleguje do `hideBottomLoader`.\n- Abyss Design: [`AbyssReload`](../../AbyssDesign/src/components/ui/AbyssReload/AbyssReload.vue), [`AbyssReloadIndicator`](../../AbyssDesign/src/components/ui/AbyssReload/AbyssReloadIndicator.vue) — propsy m.in. `paddingTop`, `paddingBottom`, `indicatorPaddingTop`, `indicatorPaddingBottom`, `minLoadingTime`, `activationThreshold`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.12/MAIA-Setup-0.4.12.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.12"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.13/MAIA-Setup-0.4.13.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.13"
   },
   "android": {
-    "nativeBuild": 62,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.12/MAIA-0.4.12.apk"
+    "nativeBuild": 63,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.13/MAIA-0.4.13.apk"
   }
 }
