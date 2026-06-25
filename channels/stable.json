@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.16",
-  "appVersion": "0.4.16",
-  "publishedAt": "2026-06-25T17:37:04Z",
-  "releaseNotes": "Naprawa duplikatów notatek po nieudanym sync, lepsze komunikaty przy błędnym logowaniu oraz stabilna wysokość przycisku aktualizacji w nawigacji desktopowej podczas pobierania.\n\n### Nowości\n\n- **Sync repair — duplikaty notatek:** po nieudanej synchronizacji aplikacja deduplikuje lokalne wpisy i wywołuje `POST /notes/repair`, usuwając przypadkowe duplikaty powstałe przy ponawianiu zapisów; użytkownik dostaje powiadomienie o liczbie usuniętych wpisów.\n- **Logowanie — czytelniejsze błędy:** nieprawidłowe dane logowania nie są raportowane jako błąd sieci; modal logowania pokazuje ostrzeżenie zamiast ogólnego komunikatu o błędzie połączenia.\n\n### Poprawki\n\n- **Nawigacja desktop — przycisk aktualizacji:** w slocie `navigation-end` przycisk zachowuje stałą wysokość po przejściu w tryb paska postępu (pobieranie aktualizacji).\n- **Sync repair — kolejka:** przed naprawą deduplikowane są wpisy w `sync_queue`, żeby ponowienia flush nie tworzyły kolejnych duplikatów.\n\n### Techniczne\n\n- Moduł naprawy: [`runNotesSyncRepair.ts`](src/sync/repair/runNotesSyncRepair.ts), [`deduplicateNotes.ts`](src/sync/repair/deduplicateNotes.ts), [`deduplicateSyncQueue.ts`](src/sync/repair/deduplicateSyncQueue.ts); integracja w [`sync.store.ts`](src/stores/sync.store.ts) i [`SyncScheduler.ts`](src/sync/engine/SyncScheduler.ts).\n- Auth: [`fetch-error.ts`](src/api/fetch-error.ts) (`isInvalidLoginCredentials`), severity błędów w [`auth.store.ts`](src/stores/auth.store.ts).\n- Dev: flaga `USE_DEV_API` w `.env.development` — przełącznik między proxy Quasar a bezpośrednim `VITE_API_BASE_URL`; [`resolve-api-base-url.mjs`](tools/resolve-api-base-url.mjs), [`stop-electron-dev.mjs`](tools/stop-electron-dev.mjs).\n- UI: [`AbyssNavigation.vue`](../AbyssDesign/src/components/ui/AbyssNavigation/AbyssNavigation.vue) — `--nav-button-min-height` dla układu kolumnowego i trybu progressbar.\n- Testy: [`deduplicateNotes.spec.ts`](src/sync/repair/deduplicateNotes.spec.ts), [`runNotesSyncRepair.spec.ts`](src/sync/repair/runNotesSyncRepair.spec.ts), [`fetch-error.spec.ts`](src/api/fetch-error.spec.ts).",
+  "releaseTag": "v0.4.17",
+  "appVersion": "0.4.17",
+  "publishedAt": "2026-06-25T20:42:00Z",
+  "releaseNotes": "Ustawienia aplikacji (motyw, zoom, app lock) są wyłącznie lokalne — klient nie synchronizuje ich z API. Naprawia to błędy sieciowe przy zmianie gradientu w buildach release (Sentry MAIA-CAPACITOR-14).\n\n### Zmiany\n\n- **Ustawienia — tylko lokalnie:** `persistSettings()` zapisuje wyłącznie do IndexedDB; usunięto enqueue `PATCH /settings` i moduły `src/api/settings.ts`, `src/sync/protocol/settingsMutations.ts`.\n- **Kolejka sync — legacy settings:** `AsyncFlushWorker` usuwa zaległe wpisy `/settings` z `sync_queue` bez wywołania API (migracja dla instalacji z 0.4.15–0.4.16).\n\n### Techniczne\n\n- Store: [`settings.store.ts`](src/stores/settings.store.ts).\n- Flush: [`AsyncFlushWorker.ts`](src/sync/engine/AsyncFlushWorker.ts).\n- Testy: [`settings.store.spec.ts`](src/stores/settings.store.spec.ts), [`AsyncFlushWorker.spec.ts`](src/sync/engine/AsyncFlushWorker.spec.ts).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.16/MAIA-Setup-0.4.16.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.16"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.17/MAIA-Setup-0.4.17.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.17"
   },
   "android": {
     "nativeBuild": 65,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.16/MAIA-0.4.16.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.17/MAIA-0.4.17.apk"
   }
 }
