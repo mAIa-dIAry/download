@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.17",
-  "appVersion": "0.4.17",
-  "publishedAt": "2026-06-25T20:42:00Z",
-  "releaseNotes": "Ustawienia aplikacji (motyw, zoom, app lock) są wyłącznie lokalne — klient nie synchronizuje ich z API. Naprawia to błędy sieciowe przy zmianie gradientu w buildach release (Sentry MAIA-CAPACITOR-14).\n\n### Zmiany\n\n- **Ustawienia — tylko lokalnie:** `persistSettings()` zapisuje wyłącznie do IndexedDB; usunięto enqueue `PATCH /settings` i moduły `src/api/settings.ts`, `src/sync/protocol/settingsMutations.ts`.\n- **Kolejka sync — legacy settings:** `AsyncFlushWorker` usuwa zaległe wpisy `/settings` z `sync_queue` bez wywołania API (migracja dla instalacji z 0.4.15–0.4.16).\n\n### Techniczne\n\n- Store: [`settings.store.ts`](src/stores/settings.store.ts).\n- Flush: [`AsyncFlushWorker.ts`](src/sync/engine/AsyncFlushWorker.ts).\n- Testy: [`settings.store.spec.ts`](src/stores/settings.store.spec.ts), [`AsyncFlushWorker.spec.ts`](src/sync/engine/AsyncFlushWorker.spec.ts).",
+  "releaseTag": "v0.4.18",
+  "appVersion": "0.4.18",
+  "publishedAt": "2026-06-27T00:04:41Z",
+  "releaseNotes": "Stabilna identyfikacja urządzenia i nagłówki kontekstu device na każdym żądaniu API — poprawna nazwa telefonu z systemu, spójne ID sprzętowe na desktop/mobile oraz śledzenie aktywności urządzeń po stronie backendu.\n\n### Nowości\n\n- **Stabilne ID urządzenia:** Electron — identyfikator sprzętowy przez IPC (`node-machine-id`); Android/iOS — `@capacitor/device` (`Device.getId()`) z cache w `@capacitor/preferences`; przeglądarka — persistowany UUID w `localStorage`.\n- **Nagłówki device na każdym requeście:** `X-Maia-Device-Id`, `X-Maia-Device-Name`, `X-Maia-Device-Type` dołączane w `apiFetch` i przy odświeżaniu tokena (login, rejestracja, sync, ustawienia).\n- **Nazwa urządzenia z OS:** na mobile z `Device.getInfo().name` (fallback: model, potem generyczna etykieta); na desktop bez zmian — hostname z Electron.\n\n### Zmiany\n\n- **`getStableDeviceId()`:** asynchroniczne rozwiązywanie ID z migracją ze starego klucza `maia:device-id`.\n- **Sync notatek:** `normalizeNotesForSync` zachowuje sensowną historyczną nazwę urządzenia przy naprawie legacy wpisów; payload API (`toApiDevicePayload`, `noteToApiNote`) jest asynchroniczny.\n- **Capacitor resume:** invalidacja cache nagłówków device po wznowieniu aplikacji.\n\n### Poprawki\n\n- **Etykieta „Android” zamiast nazwy telefonu:** mobile używa teraz nazwy z systemu operacyjnego zamiast hardcoded stringa.\n- **Niestabilne UUID w localStorage:** desktop i native nie polegają wyłącznie na losowym UUID w przeglądarce — ID wiąże się ze sprzętem / instalacją natywną.\n\n### Wymagania\n\n- Wymaga zaktualizowanego **BackendAPI** (nagłówki device, `UserDevice.lastSeenAt`). Stary klient lub backend bez obsługi nagłówków → błędy `400` na chronionych trasach.\n\n### Techniczne\n\n- ID: [`userDeviceId.ts`](src/utils/userDeviceId.ts), IPC [`electron-main.ts`](src-electron/electron-main.ts) (`system:get-hardware-device-id`).\n- Device payload: [`noteDevice.ts`](src/utils/noteDevice.ts), [`device-headers.ts`](src/api/device-headers.ts), [`client.ts`](src/api/client.ts).\n- Zależności: `@capacitor/device`, `@capacitor/preferences`, `node-machine-id`.\n- Kontrakt API: [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md).\n- Testy: [`noteDevice.spec.ts`](src/utils/noteDevice.spec.ts), [`userDeviceId.spec.ts`](src/utils/userDeviceId.spec.ts).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.17/MAIA-Setup-0.4.17.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.17"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.18/MAIA-Setup-0.4.18.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.18"
   },
   "android": {
-    "nativeBuild": 65,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.17/MAIA-0.4.17.apk"
+    "nativeBuild": 66,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.18/MAIA-0.4.18.apk"
   }
 }
