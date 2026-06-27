@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.19",
-  "appVersion": "0.4.19",
-  "publishedAt": "2026-06-27T00:17:53Z",
-  "releaseNotes": "Hotfix Electron — aplikacja desktopowa nie startowała po wprowadzeniu stabilnego ID urządzenia (0.4.18).\n\n### Poprawki\n\n- **Electron — import `node-machine-id`:** moduł CommonJS importowany przez default export zamiast named export (`machineIdSync`), co powodowało `SyntaxError` przy starcie procesu main (`yarn dev:windows` i build release).\n\n### Techniczne\n\n- [`electron-main.ts`](src-electron/electron-main.ts): `import machineId from 'node-machine-id'` → `machineId.machineIdSync(true)` w handlerze `system:get-hardware-device-id`.",
+  "releaseTag": "v0.4.21",
+  "appVersion": "0.4.21",
+  "publishedAt": "2026-06-27T00:48:48Z",
+  "releaseNotes": "Hotfix Electron — identyfikator sprzętowy bez importu runtime w procesie main (ESM).\n\n### Poprawki\n\n- **Electron hardware ID:** logika `MachineGuid` / platform id przeniesiona do CommonJS bridge (`hardware-device-id-bridge.cjs`), ładowanego przez `createRequire` — bez bundlowania `child_process` w ESM i bez zależności `node-machine-id`.\n- **Release:** bridge kopiowany do `resources/` przez `extraResources` (poza `app.asar`, ładowany przez `createRequire`).\n\n### Techniczne\n\n- [`hardware-device-id.ts`](src-electron/hardware-device-id.ts), [`hardware-device-id-bridge.cjs`](src-electron/hardware-device-id-bridge.cjs).\n- Usunięto `node-machine-id` z dependencies.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.19/MAIA-Setup-0.4.19.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.19"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.21/MAIA-Setup-0.4.21.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.21"
   },
   "android": {
     "nativeBuild": 67,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.19/MAIA-0.4.19.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.21/MAIA-0.4.21.apk"
   }
 }
