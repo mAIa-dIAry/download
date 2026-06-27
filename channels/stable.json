@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.22",
-  "appVersion": "0.4.22",
-  "publishedAt": "2026-06-27T01:06:04Z",
-  "releaseNotes": "Poprawka identyfikacji urządzenia na desktopie — Electron nie powiela już metadanych telefonu („realme 8 Pro”, typ mobile) w rejestrze urządzeń po synchronizacji notatek.\n\n### Poprawki\n\n- **Sync notatek — metadane urządzenia:** `normalizeNoteDevice` czyści zaległe dane z telefonu (nazwa/typ mobile), gdy notatka ma już bieżący `deviceId` desktopa, ale w polu `device` nadal widnieją wartości skopiowane z synchronizacji mobilnej.\n- **Electron — stabilne ID:** gdy dostępny jest bridge sprzętowy (`getHardwareDeviceId`), aplikacja nie wraca do legacy UUID z `localStorage` — ogranicza to duplikaty `UserDevice` (stary UUID + hardware id).\n\n### Techniczne\n\n- [`noteDevice.ts`](src/utils/noteDevice.ts), [`userDeviceId.ts`](src/utils/userDeviceId.ts), testy w [`noteDevice.spec.ts`](src/utils/noteDevice.spec.ts).\n- Wymaga backendu z poprawką: notatki wiążą `UserDevice` z nagłówków `X-Maia-Device-*`, a nie z `device` w body (osobny deploy BackendAPI).",
+  "releaseTag": "v0.4.23",
+  "appVersion": "0.4.23",
+  "publishedAt": "2026-06-27T01:25:56Z",
+  "releaseNotes": "Hotfix synchronizacji — cache nagłówków `X-Maia-Device-*` nie blokuje kolejnych requestów API po pierwszej nieudanej próbie rozwiązania urządzenia.\n\n### Poprawki\n\n- **Device headers cache:** `device-headers.ts` resetuje `headersPromise` po błędzie `buildDeviceHeaders()` — wcześniej odrzucony promise blokował dołączanie nagłówków do sync/importu (Sentry MAIA-CAPACITOR-15: `Request device context missing` po stronie backendu, gdy klient wysyłał request bez nagłówków).\n\n### Techniczne\n\n- [`device-headers.ts`](src/api/device-headers.ts)\n- Wymaga backendu z `ensureRequestUserDevice` (osobny deploy BackendAPI).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.22/MAIA-Setup-0.4.22.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.22"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.23/MAIA-Setup-0.4.23.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.23"
   },
   "android": {
     "nativeBuild": 67,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.22/MAIA-0.4.22.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.23/MAIA-0.4.23.apk"
   }
 }
