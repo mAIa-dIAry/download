@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.21",
-  "appVersion": "0.4.21",
-  "publishedAt": "2026-06-27T00:48:48Z",
-  "releaseNotes": "Hotfix Electron — identyfikator sprzętowy bez importu runtime w procesie main (ESM).\n\n### Poprawki\n\n- **Electron hardware ID:** logika `MachineGuid` / platform id przeniesiona do CommonJS bridge (`hardware-device-id-bridge.cjs`), ładowanego przez `createRequire` — bez bundlowania `child_process` w ESM i bez zależności `node-machine-id`.\n- **Release:** bridge kopiowany do `resources/` przez `extraResources` (poza `app.asar`, ładowany przez `createRequire`).\n\n### Techniczne\n\n- [`hardware-device-id.ts`](src-electron/hardware-device-id.ts), [`hardware-device-id-bridge.cjs`](src-electron/hardware-device-id-bridge.cjs).\n- Usunięto `node-machine-id` z dependencies.",
+  "releaseTag": "v0.4.22",
+  "appVersion": "0.4.22",
+  "publishedAt": "2026-06-27T01:06:04Z",
+  "releaseNotes": "Poprawka identyfikacji urządzenia na desktopie — Electron nie powiela już metadanych telefonu („realme 8 Pro”, typ mobile) w rejestrze urządzeń po synchronizacji notatek.\n\n### Poprawki\n\n- **Sync notatek — metadane urządzenia:** `normalizeNoteDevice` czyści zaległe dane z telefonu (nazwa/typ mobile), gdy notatka ma już bieżący `deviceId` desktopa, ale w polu `device` nadal widnieją wartości skopiowane z synchronizacji mobilnej.\n- **Electron — stabilne ID:** gdy dostępny jest bridge sprzętowy (`getHardwareDeviceId`), aplikacja nie wraca do legacy UUID z `localStorage` — ogranicza to duplikaty `UserDevice` (stary UUID + hardware id).\n\n### Techniczne\n\n- [`noteDevice.ts`](src/utils/noteDevice.ts), [`userDeviceId.ts`](src/utils/userDeviceId.ts), testy w [`noteDevice.spec.ts`](src/utils/noteDevice.spec.ts).\n- Wymaga backendu z poprawką: notatki wiążą `UserDevice` z nagłówków `X-Maia-Device-*`, a nie z `device` w body (osobny deploy BackendAPI).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.21/MAIA-Setup-0.4.21.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.21"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.22/MAIA-Setup-0.4.22.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.22"
   },
   "android": {
     "nativeBuild": 67,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.21/MAIA-0.4.21.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.22/MAIA-0.4.22.apk"
   }
 }
