@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.18",
-  "appVersion": "0.4.18",
-  "publishedAt": "2026-06-27T00:04:41Z",
-  "releaseNotes": "Stabilna identyfikacja urządzenia i nagłówki kontekstu device na każdym żądaniu API — poprawna nazwa telefonu z systemu, spójne ID sprzętowe na desktop/mobile oraz śledzenie aktywności urządzeń po stronie backendu.\n\n### Nowości\n\n- **Stabilne ID urządzenia:** Electron — identyfikator sprzętowy przez IPC (`node-machine-id`); Android/iOS — `@capacitor/device` (`Device.getId()`) z cache w `@capacitor/preferences`; przeglądarka — persistowany UUID w `localStorage`.\n- **Nagłówki device na każdym requeście:** `X-Maia-Device-Id`, `X-Maia-Device-Name`, `X-Maia-Device-Type` dołączane w `apiFetch` i przy odświeżaniu tokena (login, rejestracja, sync, ustawienia).\n- **Nazwa urządzenia z OS:** na mobile z `Device.getInfo().name` (fallback: model, potem generyczna etykieta); na desktop bez zmian — hostname z Electron.\n\n### Zmiany\n\n- **`getStableDeviceId()`:** asynchroniczne rozwiązywanie ID z migracją ze starego klucza `maia:device-id`.\n- **Sync notatek:** `normalizeNotesForSync` zachowuje sensowną historyczną nazwę urządzenia przy naprawie legacy wpisów; payload API (`toApiDevicePayload`, `noteToApiNote`) jest asynchroniczny.\n- **Capacitor resume:** invalidacja cache nagłówków device po wznowieniu aplikacji.\n\n### Poprawki\n\n- **Etykieta „Android” zamiast nazwy telefonu:** mobile używa teraz nazwy z systemu operacyjnego zamiast hardcoded stringa.\n- **Niestabilne UUID w localStorage:** desktop i native nie polegają wyłącznie na losowym UUID w przeglądarce — ID wiąże się ze sprzętem / instalacją natywną.\n\n### Wymagania\n\n- Wymaga zaktualizowanego **BackendAPI** (nagłówki device, `UserDevice.lastSeenAt`). Stary klient lub backend bez obsługi nagłówków → błędy `400` na chronionych trasach.\n\n### Techniczne\n\n- ID: [`userDeviceId.ts`](src/utils/userDeviceId.ts), IPC [`electron-main.ts`](src-electron/electron-main.ts) (`system:get-hardware-device-id`).\n- Device payload: [`noteDevice.ts`](src/utils/noteDevice.ts), [`device-headers.ts`](src/api/device-headers.ts), [`client.ts`](src/api/client.ts).\n- Zależności: `@capacitor/device`, `@capacitor/preferences`, `node-machine-id`.\n- Kontrakt API: [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md).\n- Testy: [`noteDevice.spec.ts`](src/utils/noteDevice.spec.ts), [`userDeviceId.spec.ts`](src/utils/userDeviceId.spec.ts).",
+  "releaseTag": "v0.4.19",
+  "appVersion": "0.4.19",
+  "publishedAt": "2026-06-27T00:17:53Z",
+  "releaseNotes": "Hotfix Electron — aplikacja desktopowa nie startowała po wprowadzeniu stabilnego ID urządzenia (0.4.18).\n\n### Poprawki\n\n- **Electron — import `node-machine-id`:** moduł CommonJS importowany przez default export zamiast named export (`machineIdSync`), co powodowało `SyntaxError` przy starcie procesu main (`yarn dev:windows` i build release).\n\n### Techniczne\n\n- [`electron-main.ts`](src-electron/electron-main.ts): `import machineId from 'node-machine-id'` → `machineId.machineIdSync(true)` w handlerze `system:get-hardware-device-id`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.18/MAIA-Setup-0.4.18.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.18"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.19/MAIA-Setup-0.4.19.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.19"
   },
   "android": {
-    "nativeBuild": 66,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.18/MAIA-0.4.18.apk"
+    "nativeBuild": 67,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.19/MAIA-0.4.19.apk"
   }
 }
