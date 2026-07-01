@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.23",
-  "appVersion": "0.4.23",
-  "publishedAt": "2026-06-27T01:25:56Z",
-  "releaseNotes": "Hotfix synchronizacji — cache nagłówków `X-Maia-Device-*` nie blokuje kolejnych requestów API po pierwszej nieudanej próbie rozwiązania urządzenia.\n\n### Poprawki\n\n- **Device headers cache:** `device-headers.ts` resetuje `headersPromise` po błędzie `buildDeviceHeaders()` — wcześniej odrzucony promise blokował dołączanie nagłówków do sync/importu (Sentry MAIA-CAPACITOR-15: `Request device context missing` po stronie backendu, gdy klient wysyłał request bez nagłówków).\n\n### Techniczne\n\n- [`device-headers.ts`](src/api/device-headers.ts)\n- Wymaga backendu z `ensureRequestUserDevice` (osobny deploy BackendAPI).",
+  "releaseTag": "v0.4.24",
+  "appVersion": "0.4.24",
+  "publishedAt": "2026-07-01T11:17:40Z",
+  "releaseNotes": "Ulepszenia UI i dostępności — spójniejsze komponenty Abyss, wygodniejszy archiwum z date pickerem oraz rozszerzone ustawienia konta i danych.\n\n### Nowości\n\n- **Ustawienia konta:** przycisk zmiany hasła i rozszerzone dialogi zarządzania kontem w `SettingsAccountTab`.\n- **Archiwum:** date picker w popup proxy z przyciskiem triggera w rozmiarze `medium` — wygodniejszy wybór daty na mobile.\n- **OpenEditorButton:** dopracowane style i interakcje przycisku otwierania edytora.\n\n### Zmiany\n\n- **Spójność UI:** ujednolicone rozmiary ikon, poprawione użycie `AbyssInfo` (tylko z ikoną i treścią), odświeżone zakładki ustawień (dane, bezpieczeństwo, aktualizacja, wygląd).\n- **Tłumaczenia:** nowe klucze PL dla zmiany hasła i date pickera.\n\n### Techniczne\n\n- **Capacitor (dev):** plugin `@jcesarmobile/ssl-skip` dla lokalnego developmentu z self-signed HTTPS.\n- [`OpenEditorButton.vue`](src/components/shared/OpenEditorButton/OpenEditorButton.vue), [`ArchivePage.vue`](src/pages/ArchivePage.vue), [`SettingsAccountTab.vue`](src/pages/SettingsPage/SettingsAccountTab.vue).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.23/MAIA-Setup-0.4.23.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.23"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.24/MAIA-Setup-0.4.24.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.24"
   },
   "android": {
-    "nativeBuild": 67,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.23/MAIA-0.4.23.apk"
+    "nativeBuild": 68,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.24/MAIA-0.4.24.apk"
   }
 }
