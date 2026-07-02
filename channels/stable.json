@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.24",
-  "appVersion": "0.4.24",
-  "publishedAt": "2026-07-01T11:17:40Z",
-  "releaseNotes": "Ulepszenia UI i dostępności — spójniejsze komponenty Abyss, wygodniejszy archiwum z date pickerem oraz rozszerzone ustawienia konta i danych.\n\n### Nowości\n\n- **Ustawienia konta:** przycisk zmiany hasła i rozszerzone dialogi zarządzania kontem w `SettingsAccountTab`.\n- **Archiwum:** date picker w popup proxy z przyciskiem triggera w rozmiarze `medium` — wygodniejszy wybór daty na mobile.\n- **OpenEditorButton:** dopracowane style i interakcje przycisku otwierania edytora.\n\n### Zmiany\n\n- **Spójność UI:** ujednolicone rozmiary ikon, poprawione użycie `AbyssInfo` (tylko z ikoną i treścią), odświeżone zakładki ustawień (dane, bezpieczeństwo, aktualizacja, wygląd).\n- **Tłumaczenia:** nowe klucze PL dla zmiany hasła i date pickera.\n\n### Techniczne\n\n- **Capacitor (dev):** plugin `@jcesarmobile/ssl-skip` dla lokalnego developmentu z self-signed HTTPS.\n- [`OpenEditorButton.vue`](src/components/shared/OpenEditorButton/OpenEditorButton.vue), [`ArchivePage.vue`](src/pages/ArchivePage.vue), [`SettingsAccountTab.vue`](src/pages/SettingsPage/SettingsAccountTab.vue).",
+  "releaseTag": "v0.4.25",
+  "appVersion": "0.4.25",
+  "publishedAt": "2026-07-02T21:18:51Z",
+  "releaseNotes": "Archiwum — filtrowanie wpisów po zakresie dat z poziomu wyszukiwarki oraz automatyczne dociąganie historii dla wybranego przedziału.\n\n### Nowości\n\n- **Archiwum — zakres dat:** `ArchiveSearchInput` obsługuje wybór przedziału dat (chip `@YYYY-MM-DD — YYYY-MM-DD`); `ArchivePage` filtruje notatki i ładuje brakującą historię dla zakresu.\n- **Skrót nowej notatki (Electron):** ponowna próba rejestracji globalnego skrótu po starcie aplikacji, gdy pierwsza próba się nie powiedzie.\n\n### Zmiany\n\n- **Archiwum:** komunikat pustej listy zależny od aktywnego filtra dat (`emptyDateRange`).\n\n### Techniczne\n\n- [`archiveSearch.ts`](src/utils/archiveSearch.ts), [`ArchiveSearchInput.vue`](src/components/shared/ArchiveSearchInput/ArchiveSearchInput.vue), [`ArchivePage.vue`](src/pages/ArchivePage.vue).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.24/MAIA-Setup-0.4.24.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.24"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.25/MAIA-Setup-0.4.25.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.25"
   },
   "android": {
     "nativeBuild": 68,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.24/MAIA-0.4.24.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.25/MAIA-0.4.25.apk"
   }
 }
