@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.25",
-  "appVersion": "0.4.25",
-  "publishedAt": "2026-07-02T21:18:51Z",
-  "releaseNotes": "Archiwum — filtrowanie wpisów po zakresie dat z poziomu wyszukiwarki oraz automatyczne dociąganie historii dla wybranego przedziału.\n\n### Nowości\n\n- **Archiwum — zakres dat:** `ArchiveSearchInput` obsługuje wybór przedziału dat (chip `@YYYY-MM-DD — YYYY-MM-DD`); `ArchivePage` filtruje notatki i ładuje brakującą historię dla zakresu.\n- **Skrót nowej notatki (Electron):** ponowna próba rejestracji globalnego skrótu po starcie aplikacji, gdy pierwsza próba się nie powiedzie.\n\n### Zmiany\n\n- **Archiwum:** komunikat pustej listy zależny od aktywnego filtra dat (`emptyDateRange`).\n\n### Techniczne\n\n- [`archiveSearch.ts`](src/utils/archiveSearch.ts), [`ArchiveSearchInput.vue`](src/components/shared/ArchiveSearchInput/ArchiveSearchInput.vue), [`ArchivePage.vue`](src/pages/ArchivePage.vue).",
+  "releaseTag": "v0.4.26",
+  "appVersion": "0.4.26",
+  "publishedAt": "2026-07-02T22:30:50Z",
+  "releaseNotes": "Ustawienia aktualizacji — widoczny snapshot środowiska uruchomieniowego (Chrome, Electron/Capacitor, Node) oraz aktualizacja Electrona.\n\n### Nowości\n\n- **AppVersion:** kafelki z wersją aplikacji, Chrome, Node (Electron) oraz Electron/Capacitor — dane z `useRuntimeEnvironment` i bridge Electron.\n- **Ustawienia → Aktualizacja:** zakładka korzysta z rozszerzonego `AppVersion` zamiast samego numeru wersji.\n\n### Zmiany\n\n- **Electron:** aktualizacja z 39.2.7 do 42.5.2; dynamiczne rozwiązywanie wersji w `quasar.config.ts`.\n\n### Techniczne\n\n- [`useRuntimeEnvironment.ts`](src/composables/useRuntimeEnvironment.ts), [`runtimeEnvironment.ts`](src/utils/runtimeEnvironment.ts), [`AppVersion.vue`](src/components/shared/AppVersion/AppVersion.vue), [`SettingsUpdateTab.vue`](src/pages/SettingsPage/SettingsUpdateTab.vue).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.25/MAIA-Setup-0.4.25.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.25"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-Setup-0.4.26.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.26"
   },
   "android": {
-    "nativeBuild": 68,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.25/MAIA-0.4.25.apk"
+    "nativeBuild": 69,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-0.4.26.apk"
   }
 }
