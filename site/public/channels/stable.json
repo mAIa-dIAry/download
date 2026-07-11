@@ -1,23 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.1.1",
-  "appVersion": "0.1.1",
+  "releaseTag": "v0.4.26",
+  "appVersion": "0.4.26",
+  "publishedAt": "2026-07-02T22:30:50Z",
+  "releaseNotes": "Ustawienia aktualizacji — widoczny snapshot środowiska uruchomieniowego (Chrome, Electron/Capacitor, Node) oraz aktualizacja Electrona.\n\n### Nowości\n\n- **AppVersion:** kafelki z wersją aplikacji, Chrome, Node (Electron) oraz Electron/Capacitor — dane z `useRuntimeEnvironment` i bridge Electron.\n- **Ustawienia → Aktualizacja:** zakładka korzysta z rozszerzonego `AppVersion` zamiast samego numeru wersji.\n\n### Zmiany\n\n- **Electron:** aktualizacja z 39.2.7 do 42.5.2; dynamiczne rozwiązywanie wersji w `quasar.config.ts`.\n\n### Techniczne\n\n- [`useRuntimeEnvironment.ts`](src/composables/useRuntimeEnvironment.ts), [`runtimeEnvironment.ts`](src/utils/runtimeEnvironment.ts), [`AppVersion.vue`](src/components/shared/AppVersion/AppVersion.vue), [`SettingsUpdateTab.vue`](src/pages/SettingsPage/SettingsUpdateTab.vue).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.1/MAIA-Setup-0.1.1.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.1.1"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-Setup-0.4.26.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.26"
   },
   "android": {
-    "nativeBuild": 5,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.1/MAIA-0.1.1.apk"
-  },
-  "ota": {
-    "webBundleVersion": "0.1.1-b5",
-    "url": "https://github.com/mAIa-dIAry/download/releases/download/v0.1.1/MAIA-ota-0.1.1-b5.zip",
-    "checksum": "2d7782f858467410ea386ca5e7d25467da267f63aa3799f2bba787a361c3c3ae",
-    "minNativeBuild": 5,
-    "targetNativeBuild": 5,
-    "requiresNativeUpdate": false,
-    "otaEnabled": true
+    "nativeBuild": 69,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-0.4.26.apk"
   }
 }
