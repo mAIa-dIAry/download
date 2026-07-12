@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -38,6 +38,18 @@ jobs:
 
       - name: Build landing
         run: npm run build
+
+      - name: Commit synced landing output for branch-based Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html 404.html hashmap.json assets site/public/channels/stable.json
+          if git diff --staged --quiet; then
+            echo "Landing build output is already up to date in the repository."
+          else
+            git commit -m "Sync landing build output [skip ci]"
+            git push
+          fi
 
       - name: Prepare Pages artifact
         run: |
