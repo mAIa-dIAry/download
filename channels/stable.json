@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.5.1",
-  "appVersion": "0.5.1",
-  "publishedAt": "2026-07-12T18:10:39Z",
-  "releaseNotes": "Edytor notatek — odświeżony layout strony edycji z `AbyssTemplateMain`, dopracowane style desktopowe `NoteEditor` oraz uproszczona struktura sidebara w ustawieniach.\n\n### Zmiany\n\n- **Edytor:** `EditorPage` korzysta z `AbyssTemplateMain` — spójniejszy układ i nawigacja.\n- **NoteEditor:** poprawione style desktopowe i marginesy paska narzędzi.\n- **Ustawienia:** uproszczona struktura `append` w sidebarze `SettingsPage`.\n\n### Techniczne\n\n- [`EditorPage.vue`](src/pages/EditorPage.vue), [`NoteEditor.vue`](src/components/shared/NoteEditor/NoteEditor.vue), [`SettingsPage.vue`](src/pages/SettingsPage.vue).",
+  "releaseTag": "v0.5.2",
+  "appVersion": "0.5.2",
+  "publishedAt": "2026-07-12T19:18:51Z",
+  "releaseNotes": "Ustawienia danych — czytelniejszy status synchronizacji; widget ostatnich analiz z dopracowaną logiką stanów ładowania i pustej listy.\n\n### Zmiany\n\n- **Ustawienia → Dane:** status sync oparty o `useSyncStatus` — stany offline, w toku, oczekujące i aktualne z ikoną i typem `AbyssInfo`.\n- **Pulpit:** `RecentAnalysesWidget` — uproszczona struktura, wyraźniejsze komunikaty braku danych i niedostępności API.\n\n### Techniczne\n\n- [`SettingsDataTab.vue`](src/pages/SettingsPage/SettingsDataTab.vue), [`RecentAnalysesWidget.vue`](src/components/widgets/RecentAnalysesWidget/RecentAnalysesWidget.vue), [`dailyAnalysis.store.ts`](src/stores/dailyAnalysis.store.ts).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.1/MAIA-Setup-0.5.1.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.1"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.2/MAIA-Setup-0.5.2.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.2"
   },
   "android": {
-    "nativeBuild": 69,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.1/MAIA-0.5.1.apk"
+    "nativeBuild": 70,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.2/MAIA-0.5.2.apk"
   }
 }
