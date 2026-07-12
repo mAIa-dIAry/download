@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.4.26",
-  "appVersion": "0.4.26",
-  "publishedAt": "2026-07-02T22:30:50Z",
-  "releaseNotes": "Ustawienia aktualizacji — widoczny snapshot środowiska uruchomieniowego (Chrome, Electron/Capacitor, Node) oraz aktualizacja Electrona.\n\n### Nowości\n\n- **AppVersion:** kafelki z wersją aplikacji, Chrome, Node (Electron) oraz Electron/Capacitor — dane z `useRuntimeEnvironment` i bridge Electron.\n- **Ustawienia → Aktualizacja:** zakładka korzysta z rozszerzonego `AppVersion` zamiast samego numeru wersji.\n\n### Zmiany\n\n- **Electron:** aktualizacja z 39.2.7 do 42.5.2; dynamiczne rozwiązywanie wersji w `quasar.config.ts`.\n\n### Techniczne\n\n- [`useRuntimeEnvironment.ts`](src/composables/useRuntimeEnvironment.ts), [`runtimeEnvironment.ts`](src/utils/runtimeEnvironment.ts), [`AppVersion.vue`](src/components/shared/AppVersion/AppVersion.vue), [`SettingsUpdateTab.vue`](src/pages/SettingsPage/SettingsUpdateTab.vue).",
+  "releaseTag": "v0.5.0",
+  "appVersion": "0.5.0",
+  "publishedAt": "2026-07-12T13:10:43Z",
+  "releaseNotes": "Analizy dzienne — nowa sekcja aplikacji z listą analiz, widokiem szczegółów i widgetem na pulpicie; odświeżony layout stron analizy i archiwum oraz integracja Abyss Markdown w changelogu.\n\n### Nowości\n\n- **Analizy dzienne:** `AnalysisListPage`, `AnalysisDetailPage`, store `dailyAnalysis` i API `dailyAnalyses` — przegląd historii analiz z backendu.\n- **Pulpit:** widget `RecentAnalysesWidget` z ostatnimi analizami i skrótem do pełnej listy.\n- **Changelog wydania:** komponent `ChangeLog` (dawniej `VersionChangelog`) z renderowaniem treści przez `AbyssMarkdown`.\n- **Capacitor (dev):** obsługa SSL i konfiguracja serwera dev dla lokalnego HTTPS.\n\n### Zmiany\n\n- **Layout:** spójniejsze scrollowanie i padding w `AnalysisPage`, `ArchivePage`, `IndexPage` oraz widokach analiz.\n- **Nawigacja boczna:** `AbyssSettings` → `AbyssSidebarNav` w layoutach i ustawieniach.\n- **API klienta:** rozwiązywanie targetu API (`resolveApiTarget`) z testami konfiguracji.\n- **AboutApp:** rozszerzony panel informacji o aplikacji.\n\n### Techniczne\n\n- [`dailyAnalysis.store.ts`](src/stores/dailyAnalysis.store.ts), [`AnalysisListPage.vue`](src/pages/AnalysisListPage.vue), [`AnalysisDetailPage.vue`](src/pages/AnalysisDetailPage.vue), [`RecentAnalysesWidget.vue`](src/components/widgets/RecentAnalysesWidget/RecentAnalysesWidget.vue).\n- Usunięto przestarzały plan `docs/plans/ai-analiza-notatek/`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-Setup-0.4.26.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.4.26"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.0/MAIA-Setup-0.5.0.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.0"
   },
   "android": {
     "nativeBuild": 69,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.4.26/MAIA-0.4.26.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.0/MAIA-0.5.0.apk"
   }
 }
