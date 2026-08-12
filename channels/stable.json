@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.5.2",
-  "appVersion": "0.5.2",
-  "publishedAt": "2026-07-12T19:18:51Z",
-  "releaseNotes": "Ustawienia danych — czytelniejszy status synchronizacji; widget ostatnich analiz z dopracowaną logiką stanów ładowania i pustej listy.\n\n### Zmiany\n\n- **Ustawienia → Dane:** status sync oparty o `useSyncStatus` — stany offline, w toku, oczekujące i aktualne z ikoną i typem `AbyssInfo`.\n- **Pulpit:** `RecentAnalysesWidget` — uproszczona struktura, wyraźniejsze komunikaty braku danych i niedostępności API.\n\n### Techniczne\n\n- [`SettingsDataTab.vue`](src/pages/SettingsPage/SettingsDataTab.vue), [`RecentAnalysesWidget.vue`](src/components/widgets/RecentAnalysesWidget/RecentAnalysesWidget.vue), [`dailyAnalysis.store.ts`](src/stores/dailyAnalysis.store.ts).",
+  "releaseTag": "v0.5.3",
+  "appVersion": "0.5.3",
+  "publishedAt": "2026-08-12T09:57:45Z",
+  "releaseNotes": "Stabilizacja sync i Electrona — naprawione błędy z Sentry przy repair notatek, starcie desktopu i wykresach aktywności.\n\n### Poprawki\n\n- **API client:** `Content-Type: application/json` tylko przy niepustym body — naprawia `POST /notes/repair` (400 empty body).\n- **Electron:** przy `EACCES` na zapisanym porcie renderera (zakres Hyper-V) aplikacja przechodzi na kolejny port zamiast padać przy starcie.\n- **Electron:** handlery `sync-title-bar-overlay` / zoom rejestrowane przed załadowaniem okna — bez race przy boocie.\n- **Wykresy (Abyss):** wyłączone animacje sparkline w `AbyssChart` / `AbyssHistogram` — bez crasha ApexCharts `null.node` przy odmontowaniu.\n\n### Techniczne\n\n- [`client.ts`](src/api/client.ts), [`electron-main.ts`](src-electron/electron-main.ts), [`renderer-server-port.ts`](src-electron/renderer-server-port.ts), [`electron.ts`](src/boot/electron.ts).\n- Wymaga AbyssDesign z wyłączonymi animacjami chartów oraz BackendAPI z `defaultRelation: 'and'` dla device context (`PUT /devices/current`).",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.2/MAIA-Setup-0.5.2.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.2"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.3/MAIA-Setup-0.5.3.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.3"
   },
   "android": {
     "nativeBuild": 70,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.2/MAIA-0.5.2.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.3/MAIA-0.5.3.apk"
   }
 }
