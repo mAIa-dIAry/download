@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.5.3",
-  "appVersion": "0.5.3",
-  "publishedAt": "2026-08-12T09:57:45Z",
-  "releaseNotes": "Stabilizacja sync i Electrona — naprawione błędy z Sentry przy repair notatek, starcie desktopu i wykresach aktywności.\n\n### Poprawki\n\n- **API client:** `Content-Type: application/json` tylko przy niepustym body — naprawia `POST /notes/repair` (400 empty body).\n- **Electron:** przy `EACCES` na zapisanym porcie renderera (zakres Hyper-V) aplikacja przechodzi na kolejny port zamiast padać przy starcie.\n- **Electron:** handlery `sync-title-bar-overlay` / zoom rejestrowane przed załadowaniem okna — bez race przy boocie.\n- **Wykresy (Abyss):** wyłączone animacje sparkline w `AbyssChart` / `AbyssHistogram` — bez crasha ApexCharts `null.node` przy odmontowaniu.\n\n### Techniczne\n\n- [`client.ts`](src/api/client.ts), [`electron-main.ts`](src-electron/electron-main.ts), [`renderer-server-port.ts`](src-electron/renderer-server-port.ts), [`electron.ts`](src/boot/electron.ts).\n- Wymaga AbyssDesign z wyłączonymi animacjami chartów oraz BackendAPI z `defaultRelation: 'and'` dla device context (`PUT /devices/current`).",
+  "releaseTag": "v0.5.4",
+  "appVersion": "0.5.4",
+  "publishedAt": "2026-08-19T07:59:25Z",
+  "releaseNotes": "Powiadomienia systemowe przez kolejkę AbyssNotify zamiast Quasar Notify; gość nie uderza w chmurę bez logowania.\n\n### Zmiany\n\n- **Powiadomienia:** `notify()` ze store `notify` i host `AppNotifyHost` na overlay `AbyssTemplateRoot` — stos tostów AbyssNotify z licznikiem przy tym samym `id`.\n- **Quasar:** usunięty plugin `Notify`; feedback ustawień, logowania i sync idzie przez Abyss.\n- **Ustawienia → Aktualizacja:** przycisk testowego powiadomienia do sprawdzenia kolejki.\n\n### Poprawki\n\n- **API / sync:** wywołania chmury (startup gościa, flush kolejki, analizy) dopiero po zalogowaniu — bez requestów bez JWT.\n\n### Techniczne\n\n- [`notify.store.ts`](src/stores/notify.store.ts), [`AppNotifyHost.vue`](src/components/shared/AppNotifyHost/AppNotifyHost.vue), [`auth-gate.ts`](src/api/auth-gate.ts).\n- Pakiet design systemu: `@maia/abyss-design` → `@maiadiary/abyss-design`.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.3/MAIA-Setup-0.5.3.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.3"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.4/MAIA-Setup-0.5.4.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.4"
   },
   "android": {
-    "nativeBuild": 70,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.3/MAIA-0.5.3.apk"
+    "nativeBuild": 71,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.4/MAIA-0.5.4.apk"
   }
 }
