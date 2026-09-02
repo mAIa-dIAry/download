@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.5.4",
-  "appVersion": "0.5.4",
-  "publishedAt": "2026-08-19T07:59:25Z",
-  "releaseNotes": "Powiadomienia systemowe przez kolejkę AbyssNotify zamiast Quasar Notify; gość nie uderza w chmurę bez logowania.\n\n### Zmiany\n\n- **Powiadomienia:** `notify()` ze store `notify` i host `AppNotifyHost` na overlay `AbyssTemplateRoot` — stos tostów AbyssNotify z licznikiem przy tym samym `id`.\n- **Quasar:** usunięty plugin `Notify`; feedback ustawień, logowania i sync idzie przez Abyss.\n- **Ustawienia → Aktualizacja:** przycisk testowego powiadomienia do sprawdzenia kolejki.\n\n### Poprawki\n\n- **API / sync:** wywołania chmury (startup gościa, flush kolejki, analizy) dopiero po zalogowaniu — bez requestów bez JWT.\n\n### Techniczne\n\n- [`notify.store.ts`](src/stores/notify.store.ts), [`AppNotifyHost.vue`](src/components/shared/AppNotifyHost/AppNotifyHost.vue), [`auth-gate.ts`](src/api/auth-gate.ts).\n- Pakiet design systemu: `@maia/abyss-design` → `@maiadiary/abyss-design`.",
+  "releaseTag": "v0.5.5",
+  "appVersion": "0.5.5",
+  "publishedAt": "2026-09-02T12:22:11Z",
+  "releaseNotes": "Offline-first po wygaśnięciu JWT: archiwum i analizy zostają na urządzeniu, a pad sieci nie wylogowuje.\n\n### Zmiany\n\n- **Ekran blokady:** `AbyssAppLock` w `AbyssCard` w `AbyssTemplateLogin` (bez nawigacji) zamiast dialogu; ustawianie PIN nadal w `AbyssDialog`.\n- **Auth / ustawienia / 404:** mapowanie jednej potrzeby Abyss (`AbyssForm`, `AbyssTemplateLogin`) zamiast ad-hoc Quasara.\n\n### Poprawki\n\n- **Archiwum:** lista notatek działa z lokalną bazą bez żywej sesji API.\n- **Analizy:** persist w IndexedDB, żeby lista i szczegóły przeżywały reload i tryb offline.\n- **JWT / refresh:** odświeżenie tokenu przy 401; wylogowanie tylko gdy refresh odrzuci token, nie przy błędzie sieci ani 5xx.\n- **API offline:** banner o niedostępności API zamiast utraty sesji; proaktywny refresh access tokenu.\n- **Testy:** alias `@/utils/debounce` do linked AbyssDesign, żeby `AbyssForm` dało się zaimportować w Vitest.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.4/MAIA-Setup-0.5.4.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.4"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.5/MAIA-Setup-0.5.5.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.5"
   },
   "android": {
-    "nativeBuild": 71,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.4/MAIA-0.5.4.apk"
+    "nativeBuild": 72,
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.5/MAIA-0.5.5.apk"
   }
 }
