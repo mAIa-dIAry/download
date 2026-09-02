@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "releaseTag": "v0.5.5",
-  "appVersion": "0.5.5",
-  "publishedAt": "2026-09-02T12:22:11Z",
-  "releaseNotes": "Offline-first po wygaśnięciu JWT: archiwum i analizy zostają na urządzeniu, a pad sieci nie wylogowuje.\n\n### Zmiany\n\n- **Ekran blokady:** `AbyssAppLock` w `AbyssCard` w `AbyssTemplateLogin` (bez nawigacji) zamiast dialogu; ustawianie PIN nadal w `AbyssDialog`.\n- **Auth / ustawienia / 404:** mapowanie jednej potrzeby Abyss (`AbyssForm`, `AbyssTemplateLogin`) zamiast ad-hoc Quasara.\n\n### Poprawki\n\n- **Archiwum:** lista notatek działa z lokalną bazą bez żywej sesji API.\n- **Analizy:** persist w IndexedDB, żeby lista i szczegóły przeżywały reload i tryb offline.\n- **JWT / refresh:** odświeżenie tokenu przy 401; wylogowanie tylko gdy refresh odrzuci token, nie przy błędzie sieci ani 5xx.\n- **API offline:** banner o niedostępności API zamiast utraty sesji; proaktywny refresh access tokenu.\n- **Testy:** alias `@/utils/debounce` do linked AbyssDesign, żeby `AbyssForm` dało się zaimportować w Vitest.",
+  "releaseTag": "v0.5.6",
+  "appVersion": "0.5.6",
+  "publishedAt": "2026-09-02T13:51:30Z",
+  "releaseNotes": "Toasty Abyss znowu widać; polskie etykiety przełącznika podglądu i kodu w Markdown.\n\n### Poprawki\n\n- **Powiadomienia:** `AbyssNotifyHost` w slocie `#overlay` `AbyssTemplateRoot` zamiast `Teleport` / `AppNotifyHost` z `App.vue` — layout ładuje się asynchronicznie, więc Teleport nie znajdował `#abyss-template-overlay`.\n- **Markdown:** `AbyssMarkdown` czyta `ui.markdown.preview` / `ui.markdown.code` z i18n aplikacji zamiast brakujących kluczy na switcherze widoku.",
   "downloadPageUrl": "https://maia-diary.github.io/download/",
   "desktop": {
-    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.5/MAIA-Setup-0.5.5.exe",
-    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.5"
+    "windowsUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.6/MAIA-Setup-0.5.6.exe",
+    "releasePageUrl": "https://github.com/mAIa-dIAry/download/releases/tag/v0.5.6"
   },
   "android": {
     "nativeBuild": 72,
-    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.5/MAIA-0.5.5.apk"
+    "apkUrl": "https://github.com/mAIa-dIAry/download/releases/download/v0.5.6/MAIA-0.5.6.apk"
   }
 }
